@@ -138,14 +138,17 @@ const SignUp = () => {
   };
 
   const onResendPress = async () => {
-    if (!isLoaded || resendCooldown > 0) return;
+    if (!isLoaded || resendCooldown > 0 || submitting) return;
 
+    setSubmitting(true);
     try {
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setResendCooldown(RESEND_COOLDOWN_SECONDS);
       setCodeError("");
     } catch (error) {
       setCodeError(getAuthErrorMessage(error));
+    } finally {
+      setSubmitting(false);
     }
   };
 

@@ -31,8 +31,9 @@ type DisplayNameUser = {
 } | null | undefined;
 
 export const getDisplayName = (user: DisplayNameUser, fallback = "there"): string => {
-  if (user?.firstName) return `${user.firstName} ${user.lastName}`;
-
+  const name = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
+  if (name) return name;
+  
   const email = user?.primaryEmailAddress?.emailAddress;
   if (email) {
     const localPart = email.split("@")[0];
