@@ -182,7 +182,7 @@ const SignUp = () => {
                   <Text className="auth-label">Verification code</Text>
                   <TextInput
                     className={clsx(
-                      "auth-input text-center text-xl tracking-[8px]",
+                      "auth-input text-xl tracking-[8px]",
                       codeError && "auth-input-error",
                     )}
                     placeholder="000000"

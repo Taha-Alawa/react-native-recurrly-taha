@@ -1,15 +1,15 @@
 import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { styled } from "nativewind";
+import { useUser } from "@clerk/clerk-expo";
 import images from "@/constants/images";
 import {
   HOME_BALANCE,
   HOME_SUBSCRIPTIONS,
-  HOME_USER,
   UPCOMING_SUBSCRIPTIONS,
 } from "@/constants/data";
 import { icons } from "@/constants/icons";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, getDisplayName } from "@/lib/utils";
 import dayjs from "dayjs";
 import ListHeading from "@/components/ListHeading";
 import UpcomingSubscriptionCard from "@/components/UpcomingSubscriptionCard";
@@ -19,6 +19,7 @@ import { useState } from "react";
 const SafeAreaView = styled(RNSafeAreaView);
 
 export default function Index() {
+  const { user } = useUser();
   const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
     string | null
   >(null);
@@ -30,8 +31,11 @@ export default function Index() {
           <>
             <View className="home-header">
               <View className="home-user">
-                <Image source={images.avatar} className="home-avatar" />
-                <Text className="home-user-name">{HOME_USER.name}</Text>
+                <Image
+                  source={user?.imageUrl ? { uri: user.imageUrl } : images.avatar}
+                  className="home-avatar"
+                />
+                <Text className="home-user-name">{getDisplayName(user)}</Text>
               </View>
 
               <Image source={icons.add} className="home-add-icon" />

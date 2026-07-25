@@ -5,6 +5,7 @@ import { styled } from "nativewind";
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import clsx from 'clsx';
 import images from '@/constants/images';
+import { getDisplayName } from '@/lib/utils';
 const SafeAreaView = styled(RNSafeAreaView)
 
 const Settings = () => {
@@ -25,11 +26,12 @@ const Settings = () => {
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
       <View className="home-user">
-        <Image source={images.avatar} className="home-avatar" />
+        <Image
+          source={user?.imageUrl ? { uri: user.imageUrl } : images.avatar}
+          className="home-avatar"
+        />
         <View className="ml-4">
-          <Text className="home-user-name">
-            {user?.firstName || 'Your account'}
-          </Text>
+          <Text className="home-user-name">{getDisplayName(user)}</Text>
           <Text className="text-sm font-sans-medium text-muted-foreground">
             {user?.primaryEmailAddress?.emailAddress}
           </Text>
