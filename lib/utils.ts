@@ -23,3 +23,21 @@ export const formatStatusLabel = (value?: string): string => {
   if (!value) return "Unknown";
   return value.charAt(0).toUpperCase() + value.slice(1);
 };
+
+type DisplayNameUser = {
+  firstName?: string | null;
+  lastName?: string | null;
+  primaryEmailAddress?: { emailAddress?: string | null } | null;
+} | null | undefined;
+
+export const getDisplayName = (user: DisplayNameUser, fallback = "there"): string => {
+  if (user?.firstName) return `${user.firstName} ${user.lastName}`;
+
+  const email = user?.primaryEmailAddress?.emailAddress;
+  if (email) {
+    const localPart = email.split("@")[0];
+    return localPart.charAt(0).toUpperCase() + localPart.slice(1);
+  }
+
+  return fallback;
+};
