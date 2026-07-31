@@ -16,6 +16,7 @@ import dayjs from 'dayjs';
 import { icons } from '@/constants/icons';
 import { colors } from '@/constants/theme';
 import { CATEGORY_COLORS, SUBSCRIPTION_CATEGORIES } from '@/constants/data';
+import { posthog } from '@/src/config/posthog';
 
 type Frequency = 'Monthly' | 'Yearly';
 
@@ -93,6 +94,12 @@ const CreateSubscriptionModal = ({
       };
 
       onCreate(subscription);
+      posthog.capture('subscription_created', {
+        subscription_name: name.trim(),
+        subscription_price: price,
+        subscription_frequency: frequency,
+        subscription_category: category
+      })
       resetForm();
       onClose();
     } finally {
