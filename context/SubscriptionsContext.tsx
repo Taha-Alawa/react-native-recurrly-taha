@@ -4,6 +4,7 @@ import { HOME_SUBSCRIPTIONS } from '@/constants/data';
 type SubscriptionsContextValue = {
   subscriptions: Subscription[];
   addSubscription: (subscription: Subscription) => void;
+  cancelSubscription: (id: string) => void;
 };
 
 const SubscriptionsContext = createContext<SubscriptionsContextValue | null>(
@@ -22,8 +23,18 @@ export const SubscriptionsProvider = ({
     setSubscriptions((prev) => [subscription, ...prev]);
   };
 
+  const cancelSubscription = (id: string) => {
+    setSubscriptions((prev) =>
+      prev.map((subscription) =>
+        subscription.id === id
+          ? { ...subscription, status: 'cancelled' }
+          : subscription,
+      ),
+    );
+  };
+
   const value = useMemo(
-    () => ({ subscriptions, addSubscription }),
+    () => ({ subscriptions, addSubscription, cancelSubscription }),
     [subscriptions],
   );
 

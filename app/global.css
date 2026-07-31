@@ -202,6 +202,10 @@
         @apply min-w-0 flex-1 flex-row items-center gap-2;
     }
 
+    .sub-manage-row {
+        @apply flex-row items-center justify-between gap-3;
+    }
+
     .sub-label {
         @apply shrink-0 text-base font-sans-medium text-muted-foreground;
     }
@@ -428,5 +432,113 @@
 
     .category-chip-text-active {
         @apply text-accent;
+    }
+
+    .screen-header {
+        @apply mb-5 flex-row items-center justify-between;
+    }
+
+    .screen-back {
+        @apply size-10 items-center justify-center rounded-full border border-border bg-card;
+    }
+
+    .screen-back-icon {
+        @apply size-5;
+    }
+
+    .screen-title {
+        @apply text-xl font-sans-bold text-primary;
+    }
+
+    .screen-menu {
+        @apply size-10 items-center justify-center rounded-full border border-border bg-card;
+    }
+
+    .screen-menu-text {
+        @apply text-sm font-sans-bold tracking-[1px] text-primary;
+    }
+
+    .insights-chart-card {
+        @apply mb-5 rounded-3xl bg-muted p-5;
+    }
+
+    .insights-chart-row {
+        @apply flex-row items-end justify-between gap-2;
+    }
+
+    .insights-bar-col {
+        @apply flex-1 items-center;
+    }
+
+    .insights-bar-badge {
+        @apply mb-2 rounded-full bg-background px-2 py-1;
+    }
+
+    .insights-bar-badge-text {
+        @apply text-xs font-sans-bold text-primary;
+    }
+
+    .insights-bar-track {
+        @apply h-28 w-3 justify-end overflow-hidden rounded-full bg-background/70;
+    }
+
+    .insights-bar-fill {
+        @apply w-full rounded-full;
+    }
+
+    .insights-bar-label {
+        @apply mt-2 text-xs font-sans-semibold text-muted-foreground;
+    }
+
+    .insights-expenses-card {
+        @apply mb-5 flex-row items-center justify-between rounded-3xl border border-border bg-card p-5;
+    }
+
+    .insights-expenses-title {
+        @apply text-base font-sans-bold text-primary;
+    }
+
+    .insights-expenses-meta {
+        @apply mt-1 text-sm font-sans-medium text-muted-foreground;
+    }
+
+    .insights-expenses-amount {
+        @apply text-xl font-sans-extrabold text-primary;
+    }
+
+    .insights-history-item {
+        @apply flex-row items-center rounded-2xl border border-border bg-card p-4;
+    }
+
+    .insights-history-icon-wrap {
+        @apply size-12 items-center justify-center rounded-full;
+    }
+
+    .insights-history-icon {
+        @apply size-7;
+    }
+
+    .insights-history-copy {
+        @apply ml-3 min-w-0 flex-1;
+    }
+
+    .insights-history-name {
+        @apply text-base font-sans-bold text-primary;
+    }
+
+    .insights-history-date {
+        @apply mt-1 text-xs font-sans-semibold text-muted-foreground;
+    }
+
+    .insights-history-price-box {
+        @apply ml-3 shrink-0 items-end;
+    }
+
+    .insights-history-price {
+        @apply text-base font-sans-bold text-primary;
+    }
+
+    .insights-history-period {
+        @apply mt-1 text-xs font-sans-medium text-muted-foreground;
     }
 }

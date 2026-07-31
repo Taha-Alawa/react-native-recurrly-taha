@@ -3,15 +3,17 @@ import { FlatList, Text, TextInput, View } from 'react-native';
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { styled } from "nativewind";
 import SubscriptionCard from '@/components/SubscriptionCard';
+import ScreenHeader from '@/components/ScreenHeader';
 import { useSubscriptions } from '@/context/SubscriptionsContext';
 const SafeAreaView = styled(RNSafeAreaView)
 
 const Subscriptions = () => {
-  const { subscriptions } = useSubscriptions();
+  const { subscriptions, cancelSubscription } = useSubscriptions();
   const [query, setQuery] = useState('');
   const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
     string | null
   >(null);
+  const [cancellingId, setCancellingId] = useState<string | null>(null);
 
   const filteredSubscriptions = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -24,9 +26,16 @@ const Subscriptions = () => {
     );
   }, [query, subscriptions]);
 
+  const handleCancelSubscription = (id: string) => {
+    setCancellingId(id);
+    cancelSubscription(id);
+    setExpandedSubscriptionId((current) => (current === id ? null : current));
+    setCancellingId(null);
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
-      <Text className="list-title mb-4">Subscriptions</Text>
+      <ScreenHeader title="My Subscriptions" />
 
       <TextInput
         className="search-input"
@@ -44,12 +53,15 @@ const Subscriptions = () => {
         renderItem={({ item }) => (
           <SubscriptionCard
             {...item}
+            variant="manage"
             expanded={expandedSubscriptionId === item.id}
             onPress={() => {
               setExpandedSubscriptionId(
                 expandedSubscriptionId === item.id ? null : item.id
               );
             }}
+            onCancelPress={() => handleCancelSubscription(item.id)}
+            isCancelling={cancellingId === item.id}
           />
         )}
         keyExtractor={(item) => item.id}

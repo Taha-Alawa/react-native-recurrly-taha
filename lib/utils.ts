@@ -24,6 +24,25 @@ export const formatStatusLabel = (value?: string): string => {
   return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
+export const formatMaskedPaymentMethod = (value?: string): string => {
+  if (!value) return "Not provided";
+  const lastFourDigits = value.match(/\d{4}(?!.*\d)/)?.[0];
+  return lastFourDigits ? `*****${lastFourDigits}` : value;
+};
+
+export const formatRenewalCycle = (renewalDate?: string): string => {
+  if (!renewalDate) return "Not provided";
+  const target = dayjs(renewalDate);
+  if (!target.isValid()) return "Not provided";
+
+  const now = dayjs();
+  if (target.isBefore(now, "day")) return "Overdue";
+
+  const months = target.diff(now, "month");
+  if (months <= 0) return "This month";
+  return `${months} month${months > 1 ? "s" : ""}`;
+};
+
 type DisplayNameUser = {
   firstName?: string | null;
   lastName?: string | null;

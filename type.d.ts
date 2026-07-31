@@ -34,6 +34,12 @@ declare global {
         onPress: () => void;
         onCancelPress?: () => void;
         isCancelling?: boolean;
+        variant?: "detailed" | "manage";
+    }
+
+    interface ScreenHeaderProps {
+        title: string;
+        onMenuPress?: () => void;
     }
 
     interface UpcomingSubscription {
