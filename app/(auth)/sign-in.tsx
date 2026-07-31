@@ -18,6 +18,7 @@ import clsx from "clsx";
 import { icons } from "@/constants/icons";
 import { colors } from "@/constants/theme";
 import { getAuthErrorMessage } from "@/lib/clerk-errors";
+import { usePostHog } from "posthog-react-native";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
@@ -25,6 +26,7 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const SignIn = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
+  const posthog = usePostHog();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -67,13 +69,23 @@ const SignIn = () => {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
+        posthog.identify(email.trim());
+        posthog.capture("user_signed_in", {
+          $set_once: { first_sign_in_date: new Date().toISOString() },
+        });
       } else {
         setFormError(
           "We need a bit more information to sign you in. Please try again.",
         );
+        posthog.capture("sign_in_failed", {
+          reason: "incomplete_status",
+        });
       }
     } catch (error) {
       setFormError(getAuthErrorMessage(error));
+      posthog.capture("sign_in_failed", {
+        reason: getAuthErrorMessage(error),
+      });
     } finally {
       setSubmitting(false);
     }

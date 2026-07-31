@@ -226,6 +226,10 @@
         @apply py-4 text-sm font-sans-medium text-black/60;
     }
 
+    .search-input {
+        @apply mb-5 rounded-2xl border border-border bg-card px-4 py-4 text-base font-sans-medium text-primary;
+    }
+
     .auth-safe-area {
         @apply flex-1 bg-background;
     }
@@ -372,6 +376,14 @@
 
     .modal-close-text {
         @apply text-lg font-sans-bold text-primary;
+    }
+
+    .modal-accessory-bar {
+        @apply flex-row items-center justify-end border-t border-border bg-background px-5 py-3;
+    }
+
+    .modal-accessory-bar-text {
+        @apply text-base font-sans-bold text-accent;
     }
 
     .modal-body {

@@ -6,17 +6,21 @@ import { useAuth, useUser } from '@clerk/clerk-expo';
 import clsx from 'clsx';
 import images from '@/constants/images';
 import { getDisplayName } from '@/lib/utils';
+import { usePostHog } from 'posthog-react-native';
 const SafeAreaView = styled(RNSafeAreaView)
 
 const Settings = () => {
   const { user } = useUser();
   const { signOut } = useAuth();
+  const posthog = usePostHog();
   const [signingOut, setSigningOut] = useState(false);
 
   const onSignOutPress = async () => {
     if (signingOut) return;
     setSigningOut(true);
     try {
+      posthog.capture("user_signed_out");
+      posthog.reset();
       await signOut();
     } finally {
       setSigningOut(false);

@@ -18,6 +18,7 @@ import clsx from "clsx";
 import { icons } from "@/constants/icons";
 import { colors } from "@/constants/theme";
 import { getAuthErrorMessage } from "@/lib/clerk-errors";
+import { usePostHog } from "posthog-react-native";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
@@ -32,6 +33,7 @@ type FormErrors = {
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
+  const posthog = usePostHog();
 
   const [stage, setStage] = useState<"form" | "verify">("form");
 
@@ -103,8 +105,12 @@ const SignUp = () => {
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setResendCooldown(RESEND_COOLDOWN_SECONDS);
       setStage("verify");
+      posthog.capture("email_verification_requested");
     } catch (error) {
       setFormError(getAuthErrorMessage(error));
+      posthog.capture("sign_up_failed", {
+        reason: getAuthErrorMessage(error),
+      });
     } finally {
       setSubmitting(false);
     }
@@ -127,6 +133,10 @@ const SignUp = () => {
 
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
+        posthog.identify(email.trim(), {
+          $set_once: { sign_up_date: new Date().toISOString() },
+        });
+        posthog.capture("email_verified");
       } else {
         setCodeError("We couldn't verify that code. Please try again.");
       }
@@ -138,14 +148,17 @@ const SignUp = () => {
   };
 
   const onResendPress = async () => {
-    if (!isLoaded || resendCooldown > 0) return;
+    if (!isLoaded || resendCooldown > 0 || submitting) return;
 
+    setSubmitting(true);
     try {
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
       setResendCooldown(RESEND_COOLDOWN_SECONDS);
       setCodeError("");
     } catch (error) {
       setCodeError(getAuthErrorMessage(error));
+    } finally {
+      setSubmitting(false);
     }
   };
 
