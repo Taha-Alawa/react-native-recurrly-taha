@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import clsx from 'clsx';
 import { Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { colors, components } from '@/constants/theme';
 import { SubscriptionsProvider } from '@/context/SubscriptionsContext';
 
@@ -11,6 +12,7 @@ const tabBar = components.tabBar
 
 const Layout = () => {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   const TabIcon = ({ focused, icon }: { focused: boolean; icon: any }) => (
     <View className="tabs-icon">
@@ -54,7 +56,7 @@ const Layout = () => {
             key={tab.name}
             name={tab.name}
             options={{
-              title: tab.title,
+              title: t(tab.titleKey),
               tabBarIcon: ({ focused }) => (
                 <TabIcon focused={focused} icon={tab.icon} />
               )

@@ -4,6 +4,7 @@ import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { styled } from "nativewind";
 import clsx from "clsx";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 import { colors } from "@/constants/theme";
 import { formatCurrency } from "@/lib/utils";
 import ListHeading from "@/components/ListHeading";
@@ -12,10 +13,12 @@ import { useSubscriptions } from "@/context/SubscriptionsContext";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
-const WEEKDAY_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
 const Insights = () => {
+  const { t } = useTranslation();
   const { subscriptions } = useSubscriptions();
+  const weekdayLabels = t("insights.weekdays", {
+    returnObjects: true,
+  }) as string[];
 
   const weekDays = useMemo(() => {
     const startOfWeek = dayjs()
@@ -35,12 +38,12 @@ const Insights = () => {
 
       return {
         key: date.format("YYYY-MM-DD"),
-        label: WEEKDAY_LABELS[index],
+        label: weekdayLabels[index],
         total,
         isToday: date.isSame(dayjs(), "day"),
       };
     });
-  }, [subscriptions]);
+  }, [subscriptions, weekdayLabels]);
 
   const maxWeekTotal = Math.max(1, ...weekDays.map((day) => day.total));
 
@@ -72,9 +75,9 @@ const Insights = () => {
         contentContainerClassName="p-5 pb-30"
         ListHeaderComponent={() => (
           <>
-            <ScreenHeader title="Monthly Insights" />
+            <ScreenHeader title={t("insights.title")} />
 
-            <ListHeading title="Upcoming" />
+            <ListHeading title={t("insights.upcoming")} />
 
             <View className="insights-chart-card">
               <View className="insights-chart-row">
@@ -83,7 +86,7 @@ const Insights = () => {
                     10,
                     (day.total / maxWeekTotal) * 100
                   );
-
+ 
                   return (
                     <View key={day.key} className="insights-bar-col">
                       {day.isToday && day.total > 0 && (
@@ -111,7 +114,9 @@ const Insights = () => {
 
             <View className="insights-expenses-card">
               <View>
-                <Text className="insights-expenses-title">Expenses</Text>
+                <Text className="insights-expenses-title">
+                  {t("insights.expenses")}
+                </Text>
                 <Text className="insights-expenses-meta">
                   {dayjs().format("MMMM YYYY")}
                 </Text>
@@ -121,7 +126,7 @@ const Insights = () => {
               </Text>
             </View>
 
-            <ListHeading title="History" />
+            <ListHeading title={t("insights.history")} />
           </>
         )}
         renderItem={({ item }) => {
@@ -149,7 +154,7 @@ const Insights = () => {
                   {formatCurrency(item.price, item.currency)}
                 </Text>
                 <Text className="insights-history-period">
-                  per {isYearly ? "year" : "month"}
+                  {isYearly ? t("insights.perYear") : t("insights.perMonth")}
                 </Text>
               </View>
             </View>
@@ -157,7 +162,7 @@ const Insights = () => {
         }}
         ItemSeparatorComponent={() => <View className="h-3" />}
         ListEmptyComponent={() => (
-          <Text className="home-empty-state">No subscription history yet.</Text>
+          <Text className="home-empty-state">{t("insights.noHistory")}</Text>
         )}
       />
     </SafeAreaView>

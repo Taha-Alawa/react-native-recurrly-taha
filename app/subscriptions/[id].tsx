@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Link, useLocalSearchParams } from 'expo-router';
 import { usePostHog } from 'posthog-react-native';
+import { useTranslation } from 'react-i18next';
 
 const SubscriptionsDetails = () => {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const posthog = usePostHog();
 
@@ -15,9 +17,9 @@ const SubscriptionsDetails = () => {
 
   return (
     <View>
-      <Text>Subscription Details: {id}</Text>
+      <Text>{t('subscriptionDetail.title', { id })}</Text>
       <Link href="/" className="text-primary">
-        Back back to home
+        {t('subscriptionDetail.backToHome')}
       </Link>
     </View>
   );

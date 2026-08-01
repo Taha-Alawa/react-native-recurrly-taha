@@ -1,0 +1,171 @@
+{
+  "common": {
+    "notProvided": "Not provided",
+    "unknown": "Unknown",
+    "overdue": "Overdue",
+    "thisMonth": "This month",
+    "month_one": "{{count}} month",
+    "month_other": "{{count}} months",
+    "viewAll": "View all",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "guestFallback": "there",
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "cancelled": "Cancelled"
+    }
+  },
+  "categories": {
+    "Entertainment": "Entertainment",
+    "AI Tools": "AI Tools",
+    "Developer Tools": "Developer Tools",
+    "Design": "Design",
+    "Productivity": "Productivity",
+    "Cloud": "Cloud",
+    "Music": "Music",
+    "Other": "Other"
+  },
+  "tabs": {
+    "home": "Home",
+    "subscriptions": "Subscriptions",
+    "insights": "Insights",
+    "settings": "Settings"
+  },
+  "auth": {
+    "wordmarkSub": "Smart Billing",
+    "signIn": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to continue managing your subscriptions",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "show": "Show",
+      "hide": "Hide",
+      "submit": "Sign in",
+      "newToApp": "New to Subly?",
+      "createAccount": "Create an account",
+      "incompleteError": "We need a bit more information to sign you in. Please try again.",
+      "errors": {
+        "emailRequired": "Enter your email address.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordRequired": "Enter your password."
+      }
+    },
+    "signUp": {
+      "title": "Create your account",
+      "subtitle": "Track every subscription and never miss a renewal again",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Create a password",
+      "passwordHelper": "At least 8 characters",
+      "confirmPasswordLabel": "Confirm password",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "submit": "Create account",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "errors": {
+        "emailRequired": "Enter your email address.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordRequired": "Create a password.",
+        "passwordTooShort": "Password must be at least 8 characters.",
+        "passwordMismatch": "Passwords don't match."
+      },
+      "verify": {
+        "title": "Check your email",
+        "subtitle": "Enter the 6-digit code we sent to {{email}}",
+        "codeLabel": "Verification code",
+        "submit": "Verify and continue",
+        "resendIn": "Resend code in {{seconds}}s",
+        "resendNow": "Didn't get a code? Resend it",
+        "editEmail": "Edit email address",
+        "codeRequired": "Enter the 6-digit code.",
+        "codeInvalid": "We couldn't verify that code. Please try again."
+      }
+    },
+    "clerkErrors": {
+      "form_identifier_not_found": "We couldn't find an account with that email.",
+      "form_password_incorrect": "That password doesn't match. Please try again.",
+      "form_identifier_exists": "An account with that email already exists. Try signing in instead.",
+      "form_password_pwned": "That password has appeared in a data breach. Please choose a different one.",
+      "form_password_length_too_short": "Password must be at least 8 characters.",
+      "form_param_format_invalid": "Enter a valid email address.",
+      "form_code_incorrect": "That code isn't right. Please check and try again.",
+      "verification_expired": "That code has expired. Request a new one below.",
+      "too_many_requests": "Too many attempts. Please wait a moment and try again.",
+      "default": "Something went wrong. Please try again."
+    }
+  },
+  "home": {
+    "balanceLabel": "Total balance",
+    "nextRenewal": "Next renewal",
+    "upcoming": "Upcoming",
+    "allSubscriptions": "All Subscriptions",
+    "noUpcoming": "No upcoming renewals yet.",
+    "noSubscriptions": "No subscriptions yet.",
+    "daysLeft_one": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "lastDay": "Last day"
+  },
+  "subscriptions": {
+    "title": "My Subscriptions",
+    "searchPlaceholder": "Search subscriptions...",
+    "noResults": "No subscriptions found.",
+    "manage": "Manage",
+    "change": "Change",
+    "paymentInfo": "Payment info:",
+    "planDetails": "Plan details:",
+    "cancelling": "Cancelling…",
+    "cancelSubscription": "Cancel Subscription",
+    "payment": "Payment:",
+    "category": "Category:",
+    "started": "Started:",
+    "renewalDate": "Renewal Date:",
+    "status": "Status:"
+  },
+  "insights": {
+    "title": "Monthly Insights",
+    "upcoming": "Upcoming",
+    "expenses": "Expenses",
+    "history": "History",
+    "noHistory": "No subscription history yet.",
+    "perYear": "per year",
+    "perMonth": "per month",
+    "weekdays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  },
+  "settings": {
+    "signOut": "Sign out",
+    "signingOut": "Signing out…",
+    "language": "Language",
+    "languageSubtitle": "Choose your app language",
+    "chooseLanguage": "Choose language",
+    "restartTitle": "Restart required",
+    "restartMessage": "Restart the app to fully apply the new layout direction."
+  },
+  "modal": {
+    "createSubscription": {
+      "title": "New Subscription",
+      "nameLabel": "Name",
+      "namePlaceholder": "e.g. Netflix",
+      "priceLabel": "Price",
+      "pricePlaceholder": "e.g. 9.99",
+      "frequencyLabel": "Frequency",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "categoryLabel": "Category",
+      "submit": "Add Subscription",
+      "submitting": "Adding…",
+      "done": "Done",
+      "errors": {
+        "nameRequired": "Enter a subscription name.",
+        "priceInvalid": "Enter a valid price greater than 0."
+      }
+    }
+  },
+  "subscriptionDetail": {
+    "title": "Subscription Details: {{id}}",
+    "backToHome": "Back to home"
+  }
+}

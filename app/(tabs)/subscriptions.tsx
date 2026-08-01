@@ -2,12 +2,15 @@ import React, { useMemo, useState } from 'react';
 import { FlatList, Text, TextInput, View } from 'react-native';
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { styled } from "nativewind";
+import { useTranslation } from 'react-i18next';
 import SubscriptionCard from '@/components/SubscriptionCard';
 import ScreenHeader from '@/components/ScreenHeader';
+import { colors } from '@/constants/theme';
 import { useSubscriptions } from '@/context/SubscriptionsContext';
 const SafeAreaView = styled(RNSafeAreaView)
 
 const Subscriptions = () => {
+  const { t } = useTranslation();
   const { subscriptions, cancelSubscription } = useSubscriptions();
   const [query, setQuery] = useState('');
   const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
@@ -35,12 +38,12 @@ const Subscriptions = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
-      <ScreenHeader title="My Subscriptions" />
+      <ScreenHeader title={t('subscriptions.title')} />
 
       <TextInput
         className="search-input"
-        placeholder="Search subscriptions..."
-        placeholderTextColor="rgba(0,0,0,0.4)"
+        placeholder={t('subscriptions.searchPlaceholder')}
+        placeholderTextColor={colors.mutedForeground}
         value={query}
         onChangeText={setQuery}
         autoCapitalize="none"
@@ -69,7 +72,7 @@ const Subscriptions = () => {
         keyboardShouldPersistTaps="handled"
         keyboardDismissMode="on-drag"
         ListEmptyComponent={() => (
-          <Text className="home-empty-state">No subscriptions found.</Text>
+          <Text className="home-empty-state">{t('subscriptions.noResults')}</Text>
         )}
         extraData={expandedSubscriptionId}
         ItemSeparatorComponent={() => <View className="h-4" />}

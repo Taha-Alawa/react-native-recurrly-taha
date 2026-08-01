@@ -1,4 +1,4 @@
-import { Image, Pressable, Text, View } from 'react-native';
+import { I18nManager, Image, Pressable, Text, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { icons } from '@/constants/icons';
 
@@ -14,7 +14,11 @@ const ScreenHeader = ({ title, onMenuPress }: ScreenHeaderProps) => {
         }}
         hitSlop={8}
       >
-        <Image source={icons.back} className="screen-back-icon" />
+        <Image
+          source={icons.back}
+          className="screen-back-icon"
+          style={I18nManager.isRTL ? { transform: [{ scaleX: -1 }] } : undefined}
+        />
       </Pressable>
       <Text className="screen-title">{title}</Text>
       <Pressable className="screen-menu" onPress={onMenuPress} hitSlop={8}>

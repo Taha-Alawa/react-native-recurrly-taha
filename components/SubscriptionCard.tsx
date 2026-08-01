@@ -7,6 +7,7 @@ import {
 } from '@/lib/utils';
 import clsx from 'clsx';
 import { View, Image, Text, Pressable } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 const SubscriptionCard = ({
   name,
@@ -27,8 +28,12 @@ const SubscriptionCard = ({
   isCancelling,
   variant = 'detailed',
 }: SubscriptionCardProps) => {
-  const fallback = 'Not provided';
+  const { t } = useTranslation();
+  const fallback = t('common.notProvided');
   const isManageVariant = variant === 'manage';
+  const categoryLabel = category?.trim()
+    ? t(`categories.${category.trim()}`, { defaultValue: category.trim() })
+    : '';
 
   return (
     <Pressable
@@ -45,9 +50,9 @@ const SubscriptionCard = ({
             </Text>
             <Text className="sub-meta" numberOfLines={1} ellipsizeMode="tail">
               {isManageVariant
-                ? plan?.trim() || category?.trim() ||
+                ? plan?.trim() || categoryLabel ||
                   (renewalDate ? formatSubscriptionDateTime(renewalDate) : "")
-                : category?.trim() || plan?.trim() ||
+                : categoryLabel || plan?.trim() ||
                   (renewalDate ? formatSubscriptionDateTime(renewalDate) : "")}
             </Text>
           </View>
@@ -66,24 +71,24 @@ const SubscriptionCard = ({
             <View className="sub-details">
               <View className="sub-manage-row">
                 <View className="sub-row-copy">
-                  <Text className="sub-label">Payment info:</Text>
+                  <Text className="sub-label">{t('subscriptions.paymentInfo')}</Text>
                   <Text className="sub-value" numberOfLines={1} ellipsizeMode="tail">
                     {formatMaskedPaymentMethod(paymentMethod)}
                   </Text>
                 </View>
                 <Pressable className="list-action" hitSlop={8}>
-                  <Text className="list-action-text">Manage</Text>
+                  <Text className="list-action-text">{t('subscriptions.manage')}</Text>
                 </Pressable>
               </View>
               <View className="sub-manage-row">
                 <View className="sub-row-copy">
-                  <Text className="sub-label">Plan details:</Text>
+                  <Text className="sub-label">{t('subscriptions.planDetails')}</Text>
                   <Text className="sub-value" numberOfLines={1} ellipsizeMode="tail">
                     {plan?.trim() || fallback}
                   </Text>
                 </View>
                 <Pressable className="list-action" hitSlop={8}>
-                  <Text className="list-action-text">Change</Text>
+                  <Text className="list-action-text">{t('subscriptions.change')}</Text>
                 </Pressable>
               </View>
 
@@ -93,7 +98,9 @@ const SubscriptionCard = ({
                 disabled={isCancelling}
               >
                 <Text className="sub-cancel-text">
-                  {isCancelling ? 'Cancelling…' : 'Cancel Subscription'}
+                  {isCancelling
+                    ? t('subscriptions.cancelling')
+                    : t('subscriptions.cancelSubscription')}
                 </Text>
               </Pressable>
             </View>
@@ -101,7 +108,7 @@ const SubscriptionCard = ({
             <View className="sub-details">
               <View className="sub-row">
                 <View className="sub-row-copy">
-                  <Text className="sub-label">Payment:</Text>
+                  <Text className="sub-label">{t('subscriptions.payment')}</Text>
                   <Text className="sub-value" numberOfLines={1} ellipsizeMode="tail">
                     {paymentMethod?.trim() || fallback}
                   </Text>
@@ -109,15 +116,15 @@ const SubscriptionCard = ({
               </View>
               <View className="sub-row">
                 <View className="sub-row-copy">
-                  <Text className="sub-label">Category:</Text>
+                  <Text className="sub-label">{t('subscriptions.category')}</Text>
                   <Text className="sub-value" numberOfLines={1} ellipsizeMode="tail">
-                    {category?.trim() || plan?.trim() || fallback}
+                    {categoryLabel || plan?.trim() || fallback}
                   </Text>
                 </View>
               </View>
               <View className="sub-row">
                 <View className="sub-row-copy">
-                  <Text className="sub-label">Started:</Text>
+                  <Text className="sub-label">{t('subscriptions.started')}</Text>
                   <Text className="sub-value" numberOfLines={1} ellipsizeMode="tail">
                     {startDate ? formatSubscriptionDateTime(startDate) : fallback}
                   </Text>
@@ -125,7 +132,7 @@ const SubscriptionCard = ({
               </View>
               <View className="sub-row">
                 <View className="sub-row-copy">
-                  <Text className="sub-label">Renewal Date:</Text>
+                  <Text className="sub-label">{t('subscriptions.renewalDate')}</Text>
                   <Text className="sub-value" numberOfLines={1} ellipsizeMode="tail">
                     {renewalDate ? formatSubscriptionDateTime(renewalDate) : fallback}
                   </Text>
@@ -133,7 +140,7 @@ const SubscriptionCard = ({
               </View>
               <View className="sub-row">
                 <View className="sub-row-copy">
-                  <Text className="sub-label">Status:</Text>
+                  <Text className="sub-label">{t('subscriptions.status')}</Text>
                   <Text className="sub-value" numberOfLines={1} ellipsizeMode="tail">
                     {status ? formatStatusLabel(status) : fallback}
                   </Text>

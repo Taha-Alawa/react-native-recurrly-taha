@@ -2,6 +2,7 @@ import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { styled } from "nativewind";
 import { useUser } from "@clerk/clerk-expo";
+import { useTranslation } from "react-i18next";
 import images from "@/constants/images";
 import { HOME_BALANCE, UPCOMING_SUBSCRIPTIONS } from "@/constants/data";
 import { icons } from "@/constants/icons";
@@ -19,6 +20,7 @@ const SafeAreaView = styled(RNSafeAreaView);
 
 export default function Index() {
   const { user } = useUser();
+  const { t } = useTranslation();
   const posthog = usePostHog();
   const { subscriptions, addSubscription } = useSubscriptions();
   const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
@@ -58,19 +60,28 @@ export default function Index() {
             </View>
 
             <View className="home-balance-card">
-              <Text className="home-balance-label">Balance</Text>
-              <View className="home-balance-row">
-                <Text className="home-balance-amount">
-                  {formatCurrency(HOME_BALANCE.amount)}
+              <View className="home-balance-top-row">
+                <Text className="home-balance-label">
+                  {t("home.balanceLabel")}
                 </Text>
+                <View className="home-balance-badge">
+                  <View className="home-balance-badge-dot" />
+                </View>
+              </View>
+              <Text className="home-balance-amount">
+                {formatCurrency(HOME_BALANCE.amount)}
+              </Text>
+              <View className="home-balance-bottom-row">
+                <View className="home-balance-bottom-dot" />
                 <Text className="home-balance-date">
-                  {dayjs(HOME_BALANCE.nextRenewalDate).format("MM/DD")}
+                  {t("home.nextRenewal")} ·{" "}
+                  {dayjs(HOME_BALANCE.nextRenewalDate).format("MMM D")}
                 </Text>
               </View>
             </View>
 
             <View>
-              <ListHeading title="Upcoming" />
+              <ListHeading title={t("home.upcoming")} />
               <FlatList
                 data={UPCOMING_SUBSCRIPTIONS}
                 renderItem={({ item }) => (
@@ -81,13 +92,13 @@ export default function Index() {
                 showsHorizontalScrollIndicator={false}
                 ListEmptyComponent={() => (
                   <Text className="home-empty-state">
-                    No upcoming renewals yet.
+                    {t("home.noUpcoming")}
                   </Text>
                 )}
               />
             </View>
 
-            <ListHeading title="All Subscriptions" />
+            <ListHeading title={t("home.allSubscriptions")} />
           </>
         )}
         data={subscriptions}
@@ -110,7 +121,7 @@ export default function Index() {
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={() => (
-          <Text className="home-empty-state">No subscriptions yet.</Text>
+          <Text className="home-empty-state">{t("home.noSubscriptions")}</Text>
         )}
         extraData={expandedSubscriptionId}
         ItemSeparatorComponent={() => <View className="h-4" />}
