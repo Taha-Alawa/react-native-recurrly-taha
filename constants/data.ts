@@ -23,10 +23,10 @@ export const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export const tabs: AppTab[] = [
-    { name: "index", title: "Home", icon: icons.home },
-    { name: "subscriptions", title: "Subscriptions", icon: icons.wallet },
-    { name: "insights", title: "Insights", icon: icons.activity },
-    { name: "settings", title: "Settings", icon: icons.setting },
+    { name: "index", titleKey: "tabs.home", icon: icons.home },
+    { name: "subscriptions", titleKey: "tabs.subscriptions", icon: icons.wallet },
+    { name: "insights", titleKey: "tabs.insights", icon: icons.activity },
+    { name: "settings", titleKey: "tabs.settings", icon: icons.setting },
 ];
 
 export const HOME_USER = {

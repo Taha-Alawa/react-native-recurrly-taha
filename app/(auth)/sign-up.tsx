@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -15,10 +14,13 @@ import { styled } from "nativewind";
 import { Link } from "expo-router";
 import { useSignUp } from "@clerk/clerk-expo";
 import clsx from "clsx";
-import { icons } from "@/constants/icons";
+import { useTranslation } from "react-i18next";
 import { colors } from "@/constants/theme";
 import { getAuthErrorMessage } from "@/lib/clerk-errors";
 import { usePostHog } from "posthog-react-native";
+import { useLanguageSwitcher } from "@/hooks/useLanguageSwitcher";
+import LanguagePickerModal from "@/components/LanguagePickerModal";
+import { LANGUAGE_NAMES } from "@/lib/i18n";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
@@ -32,8 +34,11 @@ type FormErrors = {
 };
 
 const SignUp = () => {
+  const { t } = useTranslation();
   const { isLoaded, signUp, setActive } = useSignUp();
   const posthog = usePostHog();
+  const { currentLanguage } = useLanguageSwitcher();
+  const [languageModalVisible, setLanguageModalVisible] = useState(false);
 
   const [stage, setStage] = useState<"form" | "verify">("form");
 
@@ -71,19 +76,19 @@ const SignUp = () => {
     const nextErrors: FormErrors = {};
 
     if (!email.trim()) {
-      nextErrors.email = "Enter your email address.";
+      nextErrors.email = t("auth.signUp.errors.emailRequired");
     } else if (!EMAIL_PATTERN.test(email.trim())) {
-      nextErrors.email = "Enter a valid email address.";
+      nextErrors.email = t("auth.signUp.errors.emailInvalid");
     }
 
     if (!password) {
-      nextErrors.password = "Create a password.";
+      nextErrors.password = t("auth.signUp.errors.passwordRequired");
     } else if (password.length < 8) {
-      nextErrors.password = "Password must be at least 8 characters.";
+      nextErrors.password = t("auth.signUp.errors.passwordTooShort");
     }
 
     if (confirmPassword !== password) {
-      nextErrors.confirmPassword = "Passwords don't match.";
+      nextErrors.confirmPassword = t("auth.signUp.errors.passwordMismatch");
     }
 
     setErrors(nextErrors);
@@ -121,7 +126,7 @@ const SignUp = () => {
 
     setCodeError("");
     if (!code.trim()) {
-      setCodeError("Enter the 6-digit code.");
+      setCodeError(t("auth.signUp.verify.codeRequired"));
       return;
     }
 
@@ -138,7 +143,7 @@ const SignUp = () => {
         });
         posthog.capture("email_verified");
       } else {
-        setCodeError("We couldn't verify that code. Please try again.");
+        setCodeError(t("auth.signUp.verify.codeInvalid"));
       }
     } catch (error) {
       setCodeError(getAuthErrorMessage(error));
@@ -175,24 +180,42 @@ const SignUp = () => {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
+            <View className="auth-lang-row">
+              <Pressable
+                className="auth-lang-toggle"
+                onPress={() => setLanguageModalVisible(true)}
+                hitSlop={8}
+              >
+                <Text className="auth-lang-toggle-text">
+                  {LANGUAGE_NAMES[currentLanguage]}
+                </Text>
+              </Pressable>
+            </View>
+
             <View className="auth-brand-block">
               <View className="auth-logo-wrap">
-                <Image source={icons.logo} className="auth-logo-mark" />
+                <View className="auth-logo-mark">
+                  <Text className="auth-logo-mark-text">S</Text>
+                </View>
                 <View>
-                  <Text className="auth-wordmark">Recurly</Text>
-                  <Text className="auth-wordmark-sub">Smart Billing</Text>
+                  <Text className="auth-wordmark">Subly</Text>
+                  <Text className="auth-wordmark-sub">
+                    {t("auth.wordmarkSub")}
+                  </Text>
                 </View>
               </View>
-              <Text className="auth-title">Check your email</Text>
+              <Text className="auth-title">{t("auth.signUp.verify.title")}</Text>
               <Text className="auth-subtitle">
-                Enter the 6-digit code we sent to {email.trim()}
+                {t("auth.signUp.verify.subtitle", { email: email.trim() })}
               </Text>
             </View>
 
             <View className="auth-card">
               <View className="auth-form">
                 <View className="auth-field">
-                  <Text className="auth-label">Verification code</Text>
+                  <Text className="auth-label">
+                    {t("auth.signUp.verify.codeLabel")}
+                  </Text>
                   <TextInput
                     className={clsx(
                       "auth-input text-xl tracking-[8px]",
@@ -225,7 +248,9 @@ const SignUp = () => {
                   {submitting ? (
                     <ActivityIndicator color={colors.primary} />
                   ) : (
-                    <Text className="auth-button-text">Verify and continue</Text>
+                    <Text className="auth-button-text">
+                      {t("auth.signUp.verify.submit")}
+                    </Text>
                   )}
                 </Pressable>
 
@@ -233,8 +258,10 @@ const SignUp = () => {
                   <Pressable onPress={onResendPress} disabled={resendCooldown > 0}>
                     <Text className="auth-helper">
                       {resendCooldown > 0
-                        ? `Resend code in ${resendCooldown}s`
-                        : "Didn't get a code? Resend it"}
+                        ? t("auth.signUp.verify.resendIn", {
+                            seconds: resendCooldown,
+                          })
+                        : t("auth.signUp.verify.resendNow")}
                     </Text>
                   </Pressable>
 
@@ -245,13 +272,20 @@ const SignUp = () => {
                       setCodeError("");
                     }}
                   >
-                    <Text className="auth-link">Edit email address</Text>
+                    <Text className="auth-link">
+                      {t("auth.signUp.verify.editEmail")}
+                    </Text>
                   </Pressable>
                 </View>
               </View>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
+
+        <LanguagePickerModal
+          visible={languageModalVisible}
+          onClose={() => setLanguageModalVisible(false)}
+        />
       </SafeAreaView>
     );
   }
@@ -268,30 +302,46 @@ const SignUp = () => {
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
         >
+          <View className="auth-lang-row">
+            <Pressable
+              className="auth-lang-toggle"
+              onPress={() => setLanguageModalVisible(true)}
+              hitSlop={8}
+            >
+              <Text className="auth-lang-toggle-text">
+                {LANGUAGE_NAMES[currentLanguage]}
+              </Text>
+            </Pressable>
+          </View>
+
           <View className="auth-brand-block">
             <View className="auth-logo-wrap">
-              <Image source={icons.logo} className="auth-logo-mark" />
+              <View className="auth-logo-mark">
+                <Text className="auth-logo-mark-text">S</Text>
+              </View>
               <View>
-                <Text className="auth-wordmark">Recurly</Text>
-                <Text className="auth-wordmark-sub">Smart Billing</Text>
+                <Text className="auth-wordmark">Subly</Text>
+                <Text className="auth-wordmark-sub">
+                  {t("auth.wordmarkSub")}
+                </Text>
               </View>
             </View>
-            <Text className="auth-title">Create your account</Text>
-            <Text className="auth-subtitle">
-              Track every subscription and never miss a renewal again
-            </Text>
+            <Text className="auth-title">{t("auth.signUp.title")}</Text>
+            <Text className="auth-subtitle">{t("auth.signUp.subtitle")}</Text>
           </View>
 
           <View className="auth-card">
             <View className="auth-form">
               <View className="auth-field">
-                <Text className="auth-label">Email</Text>
+                <Text className="auth-label">
+                  {t("auth.signUp.emailLabel")}
+                </Text>
                 <TextInput
                   className={clsx(
                     "auth-input",
                     errors.email && "auth-input-error",
                   )}
-                  placeholder="Enter your email"
+                  placeholder={t("auth.signUp.emailPlaceholder")}
                   placeholderTextColor={colors.mutedForeground}
                   value={email}
                   onChangeText={(value) => {
@@ -313,14 +363,16 @@ const SignUp = () => {
               </View>
 
               <View className="auth-field">
-                <Text className="auth-label">Password</Text>
+                <Text className="auth-label">
+                  {t("auth.signUp.passwordLabel")}
+                </Text>
                 <View className="justify-center">
                   <TextInput
                     className={clsx(
                       "auth-input pr-16",
                       errors.password && "auth-input-error",
                     )}
-                    placeholder="Create a password"
+                    placeholder={t("auth.signUp.passwordPlaceholder")}
                     placeholderTextColor={colors.mutedForeground}
                     value={password}
                     onChangeText={(value) => {
@@ -345,25 +397,31 @@ const SignUp = () => {
                     hitSlop={8}
                   >
                     <Text className="text-xs font-sans-bold text-accent">
-                      {showPassword ? "Hide" : "Show"}
+                      {showPassword
+                        ? t("auth.signIn.hide")
+                        : t("auth.signIn.show")}
                     </Text>
                   </Pressable>
                 </View>
                 {errors.password ? (
                   <Text className="auth-error">{errors.password}</Text>
                 ) : (
-                  <Text className="auth-helper">At least 8 characters</Text>
+                  <Text className="auth-helper">
+                    {t("auth.signUp.passwordHelper")}
+                  </Text>
                 )}
               </View>
 
               <View className="auth-field">
-                <Text className="auth-label">Confirm password</Text>
+                <Text className="auth-label">
+                  {t("auth.signUp.confirmPasswordLabel")}
+                </Text>
                 <TextInput
                   className={clsx(
                     "auth-input",
                     errors.confirmPassword && "auth-input-error",
                   )}
-                  placeholder="Re-enter your password"
+                  placeholder={t("auth.signUp.confirmPasswordPlaceholder")}
                   placeholderTextColor={colors.mutedForeground}
                   value={confirmPassword}
                   onChangeText={(value) => {
@@ -403,20 +461,29 @@ const SignUp = () => {
                 {submitting ? (
                   <ActivityIndicator color={colors.primary} />
                 ) : (
-                  <Text className="auth-button-text">Create account</Text>
+                  <Text className="auth-button-text">
+                    {t("auth.signUp.submit")}
+                  </Text>
                 )}
               </Pressable>
             </View>
           </View>
 
           <View className="auth-link-row">
-            <Text className="auth-link-copy">Already have an account?</Text>
+            <Text className="auth-link-copy">
+              {t("auth.signUp.alreadyHaveAccount")}
+            </Text>
             <Link href="/(auth)/sign-in" className="auth-link">
-              Sign in
+              {t("auth.signUp.signIn")}
             </Link>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <LanguagePickerModal
+        visible={languageModalVisible}
+        onClose={() => setLanguageModalVisible(false)}
+      />
     </SafeAreaView>
   );
 };

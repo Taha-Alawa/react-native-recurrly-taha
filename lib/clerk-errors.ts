@@ -1,16 +1,16 @@
-const FRIENDLY_MESSAGES: Record<string, string> = {
-  form_identifier_not_found: "We couldn't find an account with that email.",
-  form_password_incorrect: "That password doesn't match. Please try again.",
-  form_identifier_exists:
-    "An account with that email already exists. Try signing in instead.",
-  form_password_pwned:
-    "That password has appeared in a data breach. Please choose a different one.",
-  form_password_length_too_short: "Password must be at least 8 characters.",
-  form_param_format_invalid: "Enter a valid email address.",
-  form_code_incorrect: "That code isn't right. Please check and try again.",
-  verification_expired: "That code has expired. Request a new one below.",
-  too_many_requests: "Too many attempts. Please wait a moment and try again.",
-};
+import i18n from "@/lib/i18n";
+
+const KNOWN_CODES = [
+  "form_identifier_not_found",
+  "form_password_incorrect",
+  "form_identifier_exists",
+  "form_password_pwned",
+  "form_password_length_too_short",
+  "form_param_format_invalid",
+  "form_code_incorrect",
+  "verification_expired",
+  "too_many_requests",
+] as const;
 
 export const getAuthErrorMessage = (error: unknown): string => {
   const clerkError = error as {
@@ -18,8 +18,9 @@ export const getAuthErrorMessage = (error: unknown): string => {
   };
 
   const firstError = clerkError?.errors?.[0];
-  if (firstError?.code && FRIENDLY_MESSAGES[firstError.code]) {
-    return FRIENDLY_MESSAGES[firstError.code];
+  const code = firstError?.code;
+  if (code && (KNOWN_CODES as readonly string[]).includes(code)) {
+    return i18n.t(`auth.clerkErrors.${code}`);
   }
   if (firstError?.longMessage) {
     return firstError.longMessage;
@@ -28,5 +29,5 @@ export const getAuthErrorMessage = (error: unknown): string => {
     return firstError.message;
   }
 
-  return "Something went wrong. Please try again.";
+  return i18n.t("auth.clerkErrors.default");
 };

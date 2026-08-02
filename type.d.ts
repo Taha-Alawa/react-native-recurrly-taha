@@ -3,7 +3,7 @@ import type { ImageSourcePropType } from "react-native";
 declare global {
     interface AppTab {
         name: string;
-        title: string;
+        titleKey: string;
         icon: ImageSourcePropType;
     }
 
@@ -34,6 +34,12 @@ declare global {
         onPress: () => void;
         onCancelPress?: () => void;
         isCancelling?: boolean;
+        variant?: "detailed" | "manage";
+    }
+
+    interface ScreenHeaderProps {
+        title: string;
+        onMenuPress?: () => void;
     }
 
     interface UpcomingSubscription {
@@ -56,6 +62,11 @@ declare global {
         visible: boolean;
         onClose: () => void;
         onCreate: (subscription: Subscription) => void;
+    }
+
+    interface LanguagePickerModalProps {
+        visible: boolean;
+        onClose: () => void;
     }
 }
 

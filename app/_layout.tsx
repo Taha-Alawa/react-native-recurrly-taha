@@ -2,10 +2,12 @@ import { ClerkLoaded, ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { SplashScreen, Stack, usePathname, useGlobalSearchParams } from "expo-router";
 import "./global.css";
 import { useFonts } from "expo-font";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { tokenCache } from "@/lib/token-cache";
 import { PostHogProvider } from "posthog-react-native";
 import { posthog } from "@/src/config/posthog";
+import { initI18n } from "@/lib/i18n";
+import LocaleFontProvider from "@/components/LocaleFontProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -63,26 +65,40 @@ export default function RootLayout() {
     "sans-bold": require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
     "sans-extrabold": require("../assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
     "sans-light": require("../assets/fonts/PlusJakartaSans-Light.ttf"),
+    "sans-regular-ar": require("../assets/fonts/IBMPlexSansArabic-Regular.ttf"),
+    "sans-medium-ar": require("../assets/fonts/IBMPlexSansArabic-Medium.ttf"),
+    "sans-semibold-ar": require("../assets/fonts/IBMPlexSansArabic-SemiBold.ttf"),
+    "sans-bold-ar": require("../assets/fonts/IBMPlexSansArabic-Bold.ttf"),
+    // IBM Plex Sans Arabic has no ExtraBold static weight — Bold is the closest match.
+    "sans-extrabold-ar": require("../assets/fonts/IBMPlexSansArabic-Bold.ttf"),
+    "sans-light-ar": require("../assets/fonts/IBMPlexSansArabic-Light.ttf"),
   });
+  const [i18nReady, setI18nReady] = useState(false);
 
-  if (!fontsLoaded) {
+  useEffect(() => {
+    initI18n().finally(() => setI18nReady(true));
+  }, []);
+
+  if (!fontsLoaded || !i18nReady) {
     return null;
   }
 
   return (
-    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <ClerkLoaded>
-        <PostHogProvider
-          client={posthog}
-          autocapture={{
-            captureScreens: false,
-            captureTouches: true,
-            propsToCapture: ["testID"],
-          }}
-        >
-          <RootNavigation />
-        </PostHogProvider>
-      </ClerkLoaded>
-    </ClerkProvider>
+    <LocaleFontProvider>
+      <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+        <ClerkLoaded>
+          <PostHogProvider
+            client={posthog}
+            autocapture={{
+              captureScreens: false,
+              captureTouches: true,
+              propsToCapture: ["testID"],
+            }}
+          >
+            <RootNavigation />
+          </PostHogProvider>
+        </ClerkLoaded>
+      </ClerkProvider>
+    </LocaleFontProvider>
   );
 }

@@ -1,5 +1,6 @@
 import { formatCurrency } from "@/lib/utils";
 import { Image, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
 
 const UpcomingSubscriptionCard = ({
   name,
@@ -8,6 +9,8 @@ const UpcomingSubscriptionCard = ({
   icon,
   currency,
 }: UpcomingSubscription) => {
+  const { t } = useTranslation();
+
   return (
     <View className="upcoming-card">
       <View className="upcoming-row">
@@ -17,7 +20,9 @@ const UpcomingSubscriptionCard = ({
             {formatCurrency(price, currency)}
           </Text>
           <Text className="upcoming-meta">
-            {daysLeft > 1 ? `${daysLeft} days left` : `Last day`}
+            {daysLeft > 1
+              ? t("home.daysLeft", { count: daysLeft })
+              : t("home.lastDay")}
           </Text>
         </View>
       </View>

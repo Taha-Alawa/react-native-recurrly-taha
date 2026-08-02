@@ -13,9 +13,11 @@ import {
 } from 'react-native';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 import { icons } from '@/constants/icons';
 import { colors } from '@/constants/theme';
 import { CATEGORY_COLORS, SUBSCRIPTION_CATEGORIES } from '@/constants/data';
+import { posthog } from '@/src/config/posthog';
 
 type Frequency = 'Monthly' | 'Yearly';
 
@@ -27,6 +29,7 @@ const CreateSubscriptionModal = ({
   onClose,
   onCreate,
 }: CreateSubscriptionModalProps) => {
+  const { t } = useTranslation();
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [frequency, setFrequency] = useState<Frequency>('Monthly');
@@ -51,12 +54,12 @@ const CreateSubscriptionModal = ({
     const nextErrors: { name?: string; price?: string } = {};
 
     if (!name.trim()) {
-      nextErrors.name = 'Enter a subscription name.';
+      nextErrors.name = t('modal.createSubscription.errors.nameRequired');
     }
 
     const priceValue = Number(price);
     if (!price.trim() || Number.isNaN(priceValue) || priceValue <= 0) {
-      nextErrors.price = 'Enter a valid price greater than 0.';
+      nextErrors.price = t('modal.createSubscription.errors.priceInvalid');
     }
 
     setErrors(nextErrors);
@@ -93,6 +96,12 @@ const CreateSubscriptionModal = ({
       };
 
       onCreate(subscription);
+      posthog.capture('subscription_created', {
+        subscription_name: name.trim(),
+        subscription_price: price,
+        subscription_frequency: frequency,
+        subscription_category: category
+      })
       resetForm();
       onClose();
     } finally {
@@ -114,7 +123,9 @@ const CreateSubscriptionModal = ({
         >
           <View className="modal-container">
             <View className="modal-header">
-              <Text className="modal-title">New Subscription</Text>
+              <Text className="modal-title">
+                {t('modal.createSubscription.title')}
+              </Text>
               <Pressable
                 className="modal-close"
                 onPress={handleClose}
@@ -130,13 +141,15 @@ const CreateSubscriptionModal = ({
               showsVerticalScrollIndicator={false}
             >
               <View className="auth-field">
-                <Text className="auth-label">Name</Text>
+                <Text className="auth-label">
+                  {t('modal.createSubscription.nameLabel')}
+                </Text>
                 <TextInput
                   className={clsx(
                     'auth-input',
                     errors.name && 'auth-input-error',
                   )}
-                  placeholder="e.g. Netflix"
+                  placeholder={t('modal.createSubscription.namePlaceholder')}
                   placeholderTextColor={colors.mutedForeground}
                   value={name}
                   onChangeText={(value) => {
@@ -154,13 +167,15 @@ const CreateSubscriptionModal = ({
               </View>
 
               <View className="auth-field">
-                <Text className="auth-label">Price</Text>
+                <Text className="auth-label">
+                  {t('modal.createSubscription.priceLabel')}
+                </Text>
                 <TextInput
                   className={clsx(
                     'auth-input',
                     errors.price && 'auth-input-error',
                   )}
-                  placeholder="e.g. 9.99"
+                  placeholder={t('modal.createSubscription.pricePlaceholder')}
                   placeholderTextColor={colors.mutedForeground}
                   value={price}
                   onChangeText={(value) => {
@@ -182,7 +197,9 @@ const CreateSubscriptionModal = ({
               </View>
 
               <View className="auth-field">
-                <Text className="auth-label">Frequency</Text>
+                <Text className="auth-label">
+                  {t('modal.createSubscription.frequencyLabel')}
+                </Text>
                 <View className="picker-row">
                   <Pressable
                     className={clsx(
@@ -198,7 +215,7 @@ const CreateSubscriptionModal = ({
                           'picker-option-text-active',
                       )}
                     >
-                      Monthly
+                      {t('modal.createSubscription.monthly')}
                     </Text>
                   </Pressable>
                   <Pressable
@@ -214,14 +231,16 @@ const CreateSubscriptionModal = ({
                         frequency === 'Yearly' && 'picker-option-text-active',
                       )}
                     >
-                      Yearly
+                      {t('modal.createSubscription.yearly')}
                     </Text>
                   </Pressable>
                 </View>
               </View>
 
               <View className="auth-field">
-                <Text className="auth-label">Category</Text>
+                <Text className="auth-label">
+                  {t('modal.createSubscription.categoryLabel')}
+                </Text>
                 <View className="category-scroll">
                   {SUBSCRIPTION_CATEGORIES.map((option) => (
                     <Pressable
@@ -238,7 +257,7 @@ const CreateSubscriptionModal = ({
                           category === option && 'category-chip-text-active',
                         )}
                       >
-                        {option}
+                        {t(`categories.${option}`)}
                       </Text>
                     </Pressable>
                   ))}
@@ -251,7 +270,9 @@ const CreateSubscriptionModal = ({
                 disabled={creating}
               >
                 <Text className="auth-button-text">
-                  {creating ? 'Adding…' : 'Add Subscription'}
+                  {creating
+                    ? t('modal.createSubscription.submitting')
+                    : t('modal.createSubscription.submit')}
                 </Text>
               </Pressable>
             </ScrollView>
@@ -263,7 +284,9 @@ const CreateSubscriptionModal = ({
         <InputAccessoryView nativeID={PRICE_ACCESSORY_ID}>
           <View className="modal-accessory-bar">
             <Pressable onPress={() => Keyboard.dismiss()} hitSlop={8}>
-              <Text className="modal-accessory-bar-text">Done</Text>
+              <Text className="modal-accessory-bar-text">
+                {t('modal.createSubscription.done')}
+              </Text>
             </Pressable>
           </View>
         </InputAccessoryView>
