@@ -4,7 +4,7 @@ export default {
     slug: "subly",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/images/icon.png",
+    icon: "./src/assets/images/icon.png",
     scheme: "subly",
     userInterfaceStyle: "automatic",
     newArchEnabled: true,
@@ -18,9 +18,9 @@ export default {
     android: {
       adaptiveIcon: {
         backgroundColor: "#ece6fa",
-        foregroundImage: "./assets/images/android-icon-foreground.png",
-        backgroundImage: "./assets/images/android-icon-background.png",
-        monochromeImage: "./assets/images/android-icon-monochrome.png",
+        foregroundImage: "./src/assets/images/android-icon-foreground.png",
+        backgroundImage: "./src/assets/images/android-icon-background.png",
+        monochromeImage: "./src/assets/images/android-icon-monochrome.png",
       },
       edgeToEdgeEnabled: true,
       predictiveBackGestureEnabled: false,
@@ -28,14 +28,14 @@ export default {
     },
     web: {
       output: "static",
-      favicon: "./assets/images/favicon.png",
+      favicon: "./src/assets/images/favicon.png",
     },
     plugins: [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          image: "./assets/images/splash-icon.png",
+          image: "./src/assets/images/splash-icon.png",
           imageWidth: 200,
           resizeMode: "contain",
           backgroundColor: "#f6f3fc",
@@ -48,13 +48,31 @@ export default {
         "expo-font",
         {
           fonts: [
-            "./assets/fonts/PlusJakartaSans-Regular.ttf",
-            "./assets/fonts/PlusJakartaSans-Bold.ttf",
-            "./assets/fonts/PlusJakartaSans-Medium.ttf",
-            "./assets/fonts/PlusJakartaSans-SemiBold.ttf",
-            "./assets/fonts/PlusJakartaSans-ExtraBold.ttf",
-            "./assets/fonts/PlusJakartaSans-Light.ttf",
+            "./src/assets/fonts/PlusJakartaSans-Regular.ttf",
+            "./src/assets/fonts/PlusJakartaSans-Bold.ttf",
+            "./src/assets/fonts/PlusJakartaSans-Medium.ttf",
+            "./src/assets/fonts/PlusJakartaSans-SemiBold.ttf",
+            "./src/assets/fonts/PlusJakartaSans-ExtraBold.ttf",
+            "./src/assets/fonts/PlusJakartaSans-Light.ttf",
+            // Arabic face — embedded natively so RTL text never falls back to
+            // a system font that lacks the app's weights.
+            "./src/assets/fonts/IBMPlexSansArabic-Regular.ttf",
+            "./src/assets/fonts/IBMPlexSansArabic-Bold.ttf",
+            "./src/assets/fonts/IBMPlexSansArabic-Medium.ttf",
+            "./src/assets/fonts/IBMPlexSansArabic-SemiBold.ttf",
+            "./src/assets/fonts/IBMPlexSansArabic-Light.ttf",
           ],
+        },
+      ],
+      [
+        "expo-image-picker",
+        {
+          photosPermission:
+            "Subly uses your photos so you can set a profile picture.",
+          // No camera or microphone capture in this app — declining these keeps
+          // the permissions off the manifest entirely.
+          cameraPermission: false,
+          microphonePermission: false,
         },
       ],
       "expo-secure-store",

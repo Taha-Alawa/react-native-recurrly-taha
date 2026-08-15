@@ -1,0 +1,262 @@
+{
+  "common": {
+    "notProvided": "غير متوفر",
+    "unknown": "غير معروف",
+    "overdue": "متأخر",
+    "thisMonth": "هذا الشهر",
+    "month_one": "شهر واحد",
+    "month_two": "شهران",
+    "month_few": "{{count}} أشهر",
+    "month_many": "{{count}} شهرًا",
+    "month_other": "{{count}} شهر",
+    "viewAll": "عرض الكل",
+    "ok": "حسنًا",
+    "cancel": "إلغاء",
+    "guestFallback": "بك",
+    "status": {
+      "active": "نشط",
+      "paused": "متوقف مؤقتًا",
+      "cancelled": "ملغى"
+    },
+    "keep": "الاحتفاظ به",
+    "feedback": {
+      "success": "تم بنجاح",
+      "info": "تنبيه",
+      "warn": "تحذير",
+      "error": "حدث خطأ ما"
+    }
+  },
+  "categories": {
+    "Entertainment": "ترفيه",
+    "AI Tools": "أدوات الذكاء الاصطناعي",
+    "Developer Tools": "أدوات المطورين",
+    "Design": "تصميم",
+    "Productivity": "إنتاجية",
+    "Cloud": "تخزين سحابي",
+    "Music": "موسيقى",
+    "Other": "أخرى"
+  },
+  "tabs": {
+    "home": "الرئيسية",
+    "subscriptions": "الاشتراكات",
+    "insights": "التحليلات",
+    "settings": "الإعدادات"
+  },
+  "auth": {
+    "wordmarkSub": "فوترة ذكية",
+    "signIn": {
+      "title": "مرحبًا بعودتك",
+      "subtitle": "سجّل الدخول لمتابعة إدارة اشتراكاتك",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "show": "إظهار",
+      "hide": "إخفاء",
+      "submit": "تسجيل الدخول",
+      "newToApp": "جديد على Subly؟",
+      "createAccount": "إنشاء حساب",
+      "errors": {
+        "emailRequired": "أدخل عنوان بريدك الإلكتروني.",
+        "emailInvalid": "أدخل عنوان بريد إلكتروني صالحًا.",
+        "passwordRequired": "أدخل كلمة المرور."
+      }
+    },
+    "signUp": {
+      "title": "أنشئ حسابك",
+      "subtitle": "تابع كل اشتراك ولا تفوّت أي تجديد بعد الآن",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "أدخل بريدك الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أنشئ كلمة مرور",
+      "passwordHelper": "8 أحرف على الأقل",
+      "confirmPasswordLabel": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+      "submit": "إنشاء حساب",
+      "alreadyHaveAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول",
+      "errors": {
+        "emailRequired": "أدخل عنوان بريدك الإلكتروني.",
+        "emailInvalid": "أدخل عنوان بريد إلكتروني صالحًا.",
+        "passwordRequired": "أنشئ كلمة مرور.",
+        "passwordTooShort": "يجب ألا تقل كلمة المرور عن 8 أحرف.",
+        "passwordMismatch": "كلمتا المرور غير متطابقتين."
+      }
+    },
+    "firebaseErrors": {
+      "invalid-email": "أدخل عنوان بريد إلكتروني صالحًا.",
+      "user-disabled": "تم تعطيل هذا الحساب.",
+      "user-not-found": "لم نتمكن من العثور على حساب بهذا البريد الإلكتروني.",
+      "wrong-password": "كلمة المرور غير مطابقة. يرجى المحاولة مرة أخرى.",
+      "invalid-credential": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      "email-already-in-use": "يوجد حساب بهذا البريد الإلكتروني بالفعل. جرّب تسجيل الدخول بدلاً من ذلك.",
+      "weak-password": "يجب ألا تقل كلمة المرور عن 6 أحرف.",
+      "too-many-requests": "محاولات كثيرة جدًا. يرجى الانتظار قليلاً والمحاولة مرة أخرى.",
+      "network-request-failed": "تعذّر الوصول إلى الخادم. تحقّق من اتصالك.",
+      "requires-recent-login": "يرجى تسجيل الدخول مرة أخرى لإتمام هذا الإجراء.",
+      "operation-not-allowed": "تسجيل الدخول بالبريد وكلمة المرور غير مفعّل لهذا المشروع.",
+      "default": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "invalid-api-key": "إعدادات التطبيق غير صحيحة (مفتاح API غير صالح). تحقّق من قيم env.",
+      "api-key-not-valid": "إعدادات التطبيق غير صحيحة (مفتاح API غير صالح). تحقّق من قيم env.",
+      "app-not-authorized": "هذا التطبيق غير مصرّح له بالوصول إلى مشروع Firebase هذا.",
+      "internal-error": "حدث خطأ داخلي في Firebase. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "home": {
+    "balanceLabel": "الرصيد الإجمالي",
+    "nextRenewal": "التجديد القادم",
+    "upcoming": "القادمة",
+    "allSubscriptions": "كل الاشتراكات",
+    "noUpcoming": "لا توجد تجديدات قادمة بعد.",
+    "noSubscriptions": "لا توجد اشتراكات بعد.",
+    "daysLeft_one": "يوم واحد متبقٍ",
+    "daysLeft_two": "يومان متبقيان",
+    "daysLeft_few": "{{count}} أيام متبقية",
+    "daysLeft_many": "{{count}} يومًا متبقيًا",
+    "daysLeft_other": "{{count}} يوم متبقٍ",
+    "lastDay": "اليوم الأخير",
+    "editBalance": "تعديل الرصيد الإجمالي",
+    "noRenewals": "لا توجد تجديدات قادمة"
+  },
+  "subscriptions": {
+    "title": "اشتراكاتي",
+    "searchPlaceholder": "ابحث في الاشتراكات...",
+    "noResults": "لم يتم العثور على اشتراكات.",
+    "manage": "إدارة",
+    "change": "تغيير",
+    "paymentInfo": "معلومات الدفع:",
+    "planDetails": "تفاصيل الخطة:",
+    "cancelling": "جارٍ الإلغاء…",
+    "cancelSubscription": "إلغاء الاشتراك",
+    "payment": "الدفع:",
+    "category": "الفئة:",
+    "started": "بدأ في:",
+    "renewalDate": "تاريخ التجديد:",
+    "status": "الحالة:",
+    "menu": {
+      "title": "خيارات الاشتراكات",
+      "addSubscription": "إضافة اشتراك",
+      "hideCancelled": "إخفاء الملغاة",
+      "showCancelled": "إظهار الملغاة",
+      "goToInsights": "عرض التحليلات"
+    },
+    "cancelSuccess": "تم إلغاء الاشتراك.",
+    "cancelConfirm": "إلغاء {{name}}؟ لا يمكن التراجع عن هذا."
+  },
+  "insights": {
+    "title": "تحليلات شهرية",
+    "upcoming": "القادمة",
+    "expenses": "المصروفات",
+    "history": "السجل",
+    "noHistory": "لا يوجد سجل اشتراكات بعد.",
+    "noHistoryInRange": "لا توجد اشتراكات ضمن النطاق الزمني المحدد.",
+    "perYear": "سنويًا",
+    "perMonth": "شهريًا",
+    "weekdays": [
+      "اثنين",
+      "ثلاثاء",
+      "أربعاء",
+      "خميس",
+      "جمعة",
+      "سبت",
+      "أحد"
+    ],
+    "menu": {
+      "title": "خيارات التحليلات",
+      "filterHistory": "تصفية السجل حسب التاريخ",
+      "clearFilter": "مسح تصفية التاريخ",
+      "goToSubscriptions": "عرض الاشتراكات"
+    }
+  },
+  "settings": {
+    "signOut": "تسجيل الخروج",
+    "signingOut": "جارٍ تسجيل الخروج…",
+    "language": "اللغة",
+    "languageSubtitle": "اختر لغة التطبيق",
+    "chooseLanguage": "اختر اللغة",
+    "restartTitle": "إعادة تشغيل مطلوبة",
+    "restartMessage": "أعد تشغيل التطبيق لتطبيق اتجاه التخطيط الجديد بالكامل.",
+    "profile": "الملف الشخصي",
+    "editProfile": "تعديل الملف الشخصي",
+    "addUsername": "أضف اسم مستخدم"
+  },
+  "modal": {
+    "createSubscription": {
+      "title": "اشتراك جديد",
+      "nameLabel": "الاسم",
+      "namePlaceholder": "مثال: Netflix",
+      "priceLabel": "السعر",
+      "pricePlaceholder": "مثال: 9.99",
+      "frequencyLabel": "التكرار",
+      "monthly": "شهري",
+      "yearly": "سنوي",
+      "categoryLabel": "الفئة",
+      "submit": "إضافة اشتراك",
+      "submitting": "جارٍ الإضافة…",
+      "done": "تم",
+      "errors": {
+        "nameRequired": "أدخل اسم الاشتراك.",
+        "priceInvalid": "أدخل سعرًا صالحًا أكبر من 0."
+      },
+      "success": "تمت إضافة الاشتراك."
+    },
+    "updateBalance": {
+      "title": "تحديث الرصيد",
+      "currentLabel": "الرصيد الحالي",
+      "amountLabel": "الرصيد الجديد",
+      "amountPlaceholder": "مثال: 2489.48",
+      "submit": "حفظ الرصيد",
+      "errors": {
+        "amountInvalid": "أدخل مبلغًا صالحًا لا يقل عن 0."
+      },
+      "success": "تم تحديث الرصيد."
+    },
+    "dateRange": {
+      "title": "اختر النطاق الزمني",
+      "hint": "اضغط على تاريخ البداية ثم تاريخ النهاية.",
+      "selected": "النطاق المحدد",
+      "apply": "عرض النتائج",
+      "clear": "مسح النطاق"
+    },
+    "updateSubscription": {
+      "title": "تعديل الاشتراك",
+      "submit": "حفظ التغييرات",
+      "success": "تم تحديث الاشتراك."
+    },
+    "profile": {
+      "title": "تعديل الملف الشخصي",
+      "avatarLabel": "صورة الملف الشخصي",
+      "choosePhoto": "اختر صورة",
+      "removePhoto": "إزالة",
+      "nameLabel": "اسم المستخدم",
+      "namePlaceholder": "بماذا نناديك؟",
+      "submit": "حفظ الملف الشخصي",
+      "submitting": "جارٍ الحفظ…",
+      "success": "تم تحديث الملف الشخصي.",
+      "permissionDenied": "الوصول إلى الصور غير مفعّل. فعّله من إعدادات جهازك لاختيار صورة.",
+      "errors": {
+        "nameRequired": "أدخل اسم مستخدم.",
+        "nameTooShort": "يجب ألا يقل اسم المستخدم عن حرفين."
+      }
+    }
+  },
+  "subscriptionDetail": {
+    "title": "تفاصيل الاشتراك: {{id}}",
+    "backToHome": "العودة إلى الرئيسية"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب.",
+    "invalid": "هذه القيمة غير صالحة."
+  },
+  "errors": {
+    "firestore": {
+      "permission-denied": "ليس لديك صلاحية الوصول إلى هذه البيانات.",
+      "unavailable": "تعذّر الوصول إلى الخادم. تحقّق من اتصالك.",
+      "unauthenticated": "انتهت جلستك. يرجى تسجيل الدخول مرة أخرى.",
+      "not-found": "هذا السجل لم يعد موجودًا.",
+      "default": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "not-configured": "لم يتم إعداد Firebase. أضف قيم EXPO_PUBLIC_FIREBASE_* إلى ملف env. وأعد التشغيل.",
+      "no-session": "تم تسجيل خروجك. سجّل الدخول مرة أخرى للمتابعة."
+    }
+  }
+}
