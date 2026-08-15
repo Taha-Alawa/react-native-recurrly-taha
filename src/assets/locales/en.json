@@ -1,0 +1,256 @@
+{
+  "common": {
+    "notProvided": "Not provided",
+    "unknown": "Unknown",
+    "overdue": "Overdue",
+    "thisMonth": "This month",
+    "month_one": "{{count}} month",
+    "month_other": "{{count}} months",
+    "viewAll": "View all",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "guestFallback": "there",
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "cancelled": "Cancelled"
+    },
+    "keep": "Keep it",
+    "feedback": {
+      "success": "Success",
+      "info": "Notice",
+      "warn": "Warning",
+      "error": "Something went wrong"
+    }
+  },
+  "categories": {
+    "Entertainment": "Entertainment",
+    "AI Tools": "AI Tools",
+    "Developer Tools": "Developer Tools",
+    "Design": "Design",
+    "Productivity": "Productivity",
+    "Cloud": "Cloud",
+    "Music": "Music",
+    "Other": "Other"
+  },
+  "tabs": {
+    "home": "Home",
+    "subscriptions": "Subscriptions",
+    "insights": "Insights",
+    "settings": "Settings"
+  },
+  "auth": {
+    "wordmarkSub": "Smart Billing",
+    "signIn": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to continue managing your subscriptions",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "show": "Show",
+      "hide": "Hide",
+      "submit": "Sign in",
+      "newToApp": "New to Subly?",
+      "createAccount": "Create an account",
+      "errors": {
+        "emailRequired": "Enter your email address.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordRequired": "Enter your password."
+      }
+    },
+    "signUp": {
+      "title": "Create your account",
+      "subtitle": "Track every subscription and never miss a renewal again",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Create a password",
+      "passwordHelper": "At least 8 characters",
+      "confirmPasswordLabel": "Confirm password",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "submit": "Create account",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "errors": {
+        "emailRequired": "Enter your email address.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordRequired": "Create a password.",
+        "passwordTooShort": "Password must be at least 8 characters.",
+        "passwordMismatch": "Passwords don't match."
+      }
+    },
+    "firebaseErrors": {
+      "invalid-email": "Enter a valid email address.",
+      "user-disabled": "That account has been disabled.",
+      "user-not-found": "We couldn't find an account with that email.",
+      "wrong-password": "That password doesn't match. Please try again.",
+      "invalid-credential": "That email or password is incorrect.",
+      "email-already-in-use": "An account with that email already exists. Try signing in instead.",
+      "weak-password": "Password must be at least 6 characters.",
+      "too-many-requests": "Too many attempts. Please wait a moment and try again.",
+      "network-request-failed": "Cannot reach the server. Check your connection.",
+      "requires-recent-login": "Please sign in again to complete that action.",
+      "operation-not-allowed": "Email/password sign-in is not enabled for this project.",
+      "default": "Something went wrong. Please try again.",
+      "invalid-api-key": "The app is misconfigured (bad API key). Check your .env values.",
+      "api-key-not-valid": "The app is misconfigured (bad API key). Check your .env values.",
+      "app-not-authorized": "This app is not authorised for that Firebase project.",
+      "internal-error": "Firebase had an internal error. Please try again."
+    }
+  },
+  "home": {
+    "balanceLabel": "Total balance",
+    "nextRenewal": "Next renewal",
+    "upcoming": "Upcoming",
+    "allSubscriptions": "All Subscriptions",
+    "noUpcoming": "No upcoming renewals yet.",
+    "noSubscriptions": "No subscriptions yet.",
+    "daysLeft_one": "{{count}} day left",
+    "daysLeft_other": "{{count}} days left",
+    "lastDay": "Last day",
+    "editBalance": "Edit total balance",
+    "noRenewals": "No upcoming renewals"
+  },
+  "subscriptions": {
+    "title": "My Subscriptions",
+    "searchPlaceholder": "Search subscriptions...",
+    "noResults": "No subscriptions found.",
+    "manage": "Manage",
+    "change": "Change",
+    "paymentInfo": "Payment info:",
+    "planDetails": "Plan details:",
+    "cancelling": "Cancelling…",
+    "cancelSubscription": "Cancel Subscription",
+    "payment": "Payment:",
+    "category": "Category:",
+    "started": "Started:",
+    "renewalDate": "Renewal Date:",
+    "status": "Status:",
+    "menu": {
+      "title": "Subscription options",
+      "addSubscription": "Add subscription",
+      "hideCancelled": "Hide cancelled",
+      "showCancelled": "Show cancelled",
+      "goToInsights": "View insights"
+    },
+    "cancelSuccess": "Subscription cancelled.",
+    "cancelConfirm": "Cancel {{name}}? This cannot be undone."
+  },
+  "insights": {
+    "title": "Monthly Insights",
+    "upcoming": "Upcoming",
+    "expenses": "Expenses",
+    "history": "History",
+    "noHistory": "No subscription history yet.",
+    "noHistoryInRange": "No subscriptions in the selected date range.",
+    "perYear": "per year",
+    "perMonth": "per month",
+    "weekdays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ],
+    "menu": {
+      "title": "Insights options",
+      "filterHistory": "Filter history by date",
+      "clearFilter": "Clear date filter",
+      "goToSubscriptions": "View subscriptions"
+    }
+  },
+  "settings": {
+    "signOut": "Sign out",
+    "signingOut": "Signing out…",
+    "language": "Language",
+    "languageSubtitle": "Choose your app language",
+    "chooseLanguage": "Choose language",
+    "restartTitle": "Restart required",
+    "restartMessage": "Restart the app to fully apply the new layout direction.",
+    "profile": "Profile",
+    "editProfile": "Edit profile",
+    "addUsername": "Add a username"
+  },
+  "modal": {
+    "createSubscription": {
+      "title": "New Subscription",
+      "nameLabel": "Name",
+      "namePlaceholder": "e.g. Netflix",
+      "priceLabel": "Price",
+      "pricePlaceholder": "e.g. 9.99",
+      "frequencyLabel": "Frequency",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "categoryLabel": "Category",
+      "submit": "Add Subscription",
+      "submitting": "Adding…",
+      "done": "Done",
+      "errors": {
+        "nameRequired": "Enter a subscription name.",
+        "priceInvalid": "Enter a valid price greater than 0."
+      },
+      "success": "Subscription added."
+    },
+    "updateBalance": {
+      "title": "Update Balance",
+      "currentLabel": "Current balance",
+      "amountLabel": "New balance",
+      "amountPlaceholder": "e.g. 2489.48",
+      "submit": "Save Balance",
+      "errors": {
+        "amountInvalid": "Enter a valid amount of 0 or more."
+      },
+      "success": "Balance updated."
+    },
+    "dateRange": {
+      "title": "Select Date Range",
+      "hint": "Tap a start date, then an end date.",
+      "selected": "Selected range",
+      "apply": "Show Results",
+      "clear": "Clear Range"
+    },
+    "updateSubscription": {
+      "title": "Edit Subscription",
+      "submit": "Save Changes",
+      "success": "Subscription updated."
+    },
+    "profile": {
+      "title": "Edit Profile",
+      "avatarLabel": "Profile picture",
+      "choosePhoto": "Choose photo",
+      "removePhoto": "Remove",
+      "nameLabel": "Username",
+      "namePlaceholder": "How should we call you?",
+      "submit": "Save Profile",
+      "submitting": "Saving…",
+      "success": "Profile updated.",
+      "permissionDenied": "Photo access is off. Enable it in your device settings to choose a picture.",
+      "errors": {
+        "nameRequired": "Enter a username.",
+        "nameTooShort": "Username must be at least 2 characters."
+      }
+    }
+  },
+  "subscriptionDetail": {
+    "title": "Subscription Details: {{id}}",
+    "backToHome": "Back to home"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "invalid": "That value isn't valid."
+  },
+  "errors": {
+    "firestore": {
+      "permission-denied": "You do not have access to that data.",
+      "unavailable": "Cannot reach the server. Check your connection.",
+      "unauthenticated": "Your session expired. Please sign in again.",
+      "not-found": "That record no longer exists.",
+      "default": "Something went wrong. Please try again.",
+      "not-configured": "Firebase isn't configured. Add the EXPO_PUBLIC_FIREBASE_* values to .env and restart.",
+      "no-session": "You're signed out. Sign in again to continue."
+    }
+  }
+}
