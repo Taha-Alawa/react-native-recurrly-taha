@@ -4,30 +4,30 @@ import type {
   TransactionTotals,
 } from "@/features/Transactions/interfaces/Transaction.interface";
 
-export const WEEK_LENGTH = 7;
-
 /**
- * A seven-day window anchored on today, not on a calendar week.
+ * One calendar month.
  *
- * Offset 0 is "today and the past six days"; offset -1 is the seven days
- * before that, and so on. Anchoring on today means the default view always
- * ends on the current day rather than on a Sunday the user has not reached.
+ * Calendar months rather than a rolling thirty days: a month is the unit
+ * salaries, rent and subscriptions already run on, so its totals line up with
+ * the bills they describe. A rolling window would cut across those and report a
+ * figure that matches no statement the user will ever see.
  */
-export interface WeekWindow {
-  /** 0 = the current window, negative = further back. */
+export interface MonthWindow {
+  /** 0 = the current month, negative = further back. */
   offset: number;
   start: Dayjs;
   end: Dayjs;
   startDate: string;
   endDate: string;
   isCurrent: boolean;
+  /** "September 2026". */
+  label: string;
 }
 
-export const buildWeekWindow = (offset: number): WeekWindow => {
-  const end = dayjs()
-    .add(offset * WEEK_LENGTH, "day")
-    .endOf("day");
-  const start = end.subtract(WEEK_LENGTH - 1, "day").startOf("day");
+export const buildMonthWindow = (offset: number): MonthWindow => {
+  const anchor = dayjs().add(offset, "month");
+  const start = anchor.startOf("month");
+  const end = anchor.endOf("month");
 
   return {
     offset,
@@ -36,12 +36,13 @@ export const buildWeekWindow = (offset: number): WeekWindow => {
     startDate: start.toISOString(),
     endDate: end.toISOString(),
     isCurrent: offset === 0,
+    label: anchor.format("MMMM YYYY"),
   };
 };
 
 export const filterByWindow = (
   transactions: Transaction[],
-  window: WeekWindow,
+  window: MonthWindow,
 ): Transaction[] =>
   transactions.filter((transaction) => {
     const movedAt = dayjs(transaction.date);

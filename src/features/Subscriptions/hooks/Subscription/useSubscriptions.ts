@@ -7,6 +7,7 @@ import dialogStore from "@/core/store/dialogStore";
 import feedbackService from "@/core/services/feedbackService";
 import SubscriptionService from "@/features/Subscriptions/services/SubscriptionService";
 import subscriptionCache from "@/features/Subscriptions/hooks/Subscription/subscriptionCache";
+import { UPDATE_SUBSCRIPTION_DIALOG } from "@/features/Subscriptions/hooks/Subscription/useSubscriptionDialog";
 import { deriveUpcoming } from "@/features/Subscriptions/utils/subscriptionFormatters";
 import type { Subscription } from "@/features/Subscriptions/interfaces/Subscription.interface";
 
@@ -90,6 +91,20 @@ export const useSubscriptions = () => {
   const handleCreatePress = useCallback(() => {
     dialogStore.open("addSubscription", "add");
   }, []);
+
+  /** Opens the same form the create flow uses, hydrated from the row. */
+  const handleEditPress = useCallback(
+    (subscription: Subscription) => {
+      dialogStore.open(UPDATE_SUBSCRIPTION_DIALOG, "update", {
+        data: subscription,
+      });
+      posthog.capture("subscription_edit_opened", {
+        subscription_id: subscription.id,
+        subscription_name: subscription.name,
+      });
+    },
+    [posthog],
+  );
 
   /** Opens the confirm sheet unlocked, carrying the row (architecture §5). */
   const handleCancelPress = useCallback((subscription: Subscription) => {
@@ -182,6 +197,7 @@ export const useSubscriptions = () => {
     fetchSubscriptions,
     handleToggleExpand,
     handleCreatePress,
+    handleEditPress,
     handleCancelPress,
     handleConfirmCancel,
     isMenuOpen,

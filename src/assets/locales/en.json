@@ -130,13 +130,8 @@
     "title": "My Subscriptions",
     "searchPlaceholder": "Search subscriptions...",
     "noResults": "No subscriptions found.",
-    "manage": "Manage",
-    "change": "Change",
-    "paymentInfo": "Payment info:",
-    "planDetails": "Plan details:",
     "cancelling": "Cancelling…",
     "cancelSubscription": "Cancel Subscription",
-    "payment": "Payment:",
     "category": "Category:",
     "started": "Started:",
     "renewalDate": "Renewal Date:",
@@ -149,7 +144,8 @@
       "goToInsights": "View dashboard"
     },
     "cancelSuccess": "Subscription cancelled.",
-    "cancelConfirm": "Cancel {{name}}? This cannot be undone."
+    "cancelConfirm": "Cancel {{name}}? This cannot be undone.",
+    "editSubscription": "Edit Subscription"
   },
   "settings": {
     "signOut": "Sign out",
@@ -273,20 +269,14 @@
     "outcome": "Expense",
     "addIncome": "+ Income",
     "addOutcome": "- Expense",
-    "weekSummary": "This range",
     "totalIncome": "Income",
     "totalOutcome": "Expenses",
     "totalSubscriptions": "Subs",
     "ofOutcome": "of expenses",
-    "thisWeek": "This week",
-    "weeksAgo_one": "{{count}} week ago",
-    "weeksAgo_other": "{{count}} weeks ago",
-    "previousWeek": "Previous week",
-    "nextWeek": "Next week",
     "subscriptionTag": "Subscription",
     "rowAccessibility": "{{name}}. Hold to delete.",
-    "empty": "Nothing recorded this week yet.",
-    "emptyPast": "Nothing recorded in this week.",
+    "empty": "Nothing recorded this month yet.",
+    "emptyPast": "Nothing recorded in this month.",
     "delete": "Delete",
     "deleteTitle": "Delete Transaction",
     "deleteConfirm": "Delete {{name}}? Your balance will be recalculated without it.",
@@ -299,9 +289,15 @@
       "title": "Transaction options",
       "addIncome": "Add income",
       "addOutcome": "Add expense",
-      "thisWeek": "Jump to this week",
-      "goToInsights": "View dashboard"
-    }
+      "goToInsights": "View dashboard",
+      "thisMonth": "Jump to this month"
+    },
+    "totalsTitle": "Totals",
+    "thisMonth": "This month",
+    "monthsAgo_one": "{{count}} month ago",
+    "monthsAgo_other": "{{count}} months ago",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month"
   },
   "transactionNames": {
     "Salary": "Salary",

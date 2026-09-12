@@ -22,12 +22,6 @@ export const formatStatusLabel = (value?: string): string => {
   return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
-export const formatMaskedPaymentMethod = (value?: string): string => {
-  if (!value) return i18n.t("common.notProvided", "Not provided");
-  const lastFourDigits = value.match(/\d{4}(?!.*\d)/)?.[0];
-  return lastFourDigits ? `*****${lastFourDigits}` : value;
-};
-
 export const formatRenewalCycle = (renewalDate?: string): string => {
   if (!renewalDate) return i18n.t("common.notProvided", "Not provided");
   const target = dayjs(renewalDate);

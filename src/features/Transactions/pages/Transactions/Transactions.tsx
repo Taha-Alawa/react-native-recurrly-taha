@@ -7,7 +7,7 @@ import ScreenMenuSheet from "@/core/components/Navigation/ScreenMenuSheet";
 import ListHeading from "@/core/components/Navigation/ListHeading";
 import EmptyState from "@/core/components/Feedback/EmptyState";
 import useTransactions from "@/features/Transactions/hooks/Transaction/useTransactions";
-import WeekNavigator from "@/features/Transactions/components/Transaction/WeekNavigator";
+import MonthNavigator from "@/features/Transactions/components/Transaction/MonthNavigator";
 import TransactionTotalsCard from "@/features/Transactions/components/Transaction/TransactionTotalsCard";
 import TransactionCard from "@/features/Transactions/components/Transaction/TransactionCard";
 import TransactionDialog from "@/features/Transactions/components/Transaction/TransactionDialog";
@@ -18,12 +18,12 @@ const SafeAreaView = styled(RNSafeAreaView);
 const Transactions = () => {
   const { t } = useTranslation();
   const {
-    weekTransactions,
+    monthTransactions,
     totals,
-    week,
+    month,
     fetchTransactions,
-    goToPreviousWeek,
-    goToNextWeek,
+    goToPreviousMonth,
+    goToNextMonth,
     handleAddPress,
     handleDeletePress,
     handleConfirmDelete,
@@ -36,7 +36,7 @@ const Transactions = () => {
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
       <FlatList
-        data={weekTransactions}
+        data={monthTransactions}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerClassName="pb-30"
@@ -47,10 +47,10 @@ const Transactions = () => {
               onMenuPress={openMenu}
             />
 
-            <WeekNavigator
-              week={week}
-              onPrevious={goToPreviousWeek}
-              onNext={goToNextWeek}
+            <MonthNavigator
+              month={month}
+              onPrevious={goToPreviousMonth}
+              onNext={goToNextMonth}
             />
 
             <TransactionTotalsCard totals={totals} />
@@ -91,9 +91,9 @@ const Transactions = () => {
         ListEmptyComponent={
           <EmptyState
             message={
-              week.isCurrent
-                ? t("transactions.empty", "Nothing recorded this week yet.")
-                : t("transactions.emptyPast", "Nothing recorded in this week.")
+              month.isCurrent
+                ? t("transactions.empty", "Nothing recorded this month yet.")
+                : t("transactions.emptyPast", "Nothing recorded in this month.")
             }
           />
         }

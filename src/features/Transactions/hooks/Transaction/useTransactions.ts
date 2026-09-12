@@ -13,7 +13,7 @@ import {
   type TransactionDialogPayload,
 } from "@/features/Transactions/hooks/Transaction/useTransactionDialog";
 import {
-  buildWeekWindow,
+  buildMonthWindow,
   calculateTotals,
   filterByWindow,
   sortByDateDesc,
@@ -33,7 +33,7 @@ export type DeleteTransactionPayload = {
 /**
  * List hook for the transaction entity (architecture §4.3a).
  *
- * Owns the week the screen is looking at, the rows and totals for it, and every
+ * Owns the month the screen is looking at, the rows and totals for it, and every
  * row action. The screen destructures this and renders.
  */
 export const useTransactions = () => {
@@ -42,37 +42,37 @@ export const useTransactions = () => {
   const posthog = usePostHog();
   const { transactions, isLoading, fetchTransactions } = useTransactionsCache();
 
-  const [weekOffset, setWeekOffset] = useState(0);
+  const [monthOffset, setMonthOffset] = useState(0);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   /* --------------------------------------------------------------- derived */
 
-  const week = useMemo(() => buildWeekWindow(weekOffset), [weekOffset]);
+  const month = useMemo(() => buildMonthWindow(monthOffset), [monthOffset]);
 
-  const weekTransactions = useMemo(
-    () => sortByDateDesc(filterByWindow(transactions, week)),
-    [transactions, week],
+  const monthTransactions = useMemo(
+    () => sortByDateDesc(filterByWindow(transactions, month)),
+    [transactions, month],
   );
 
   const totals = useMemo(
-    () => calculateTotals(weekTransactions),
-    [weekTransactions],
+    () => calculateTotals(monthTransactions),
+    [monthTransactions],
   );
 
   /* ------------------------------------------------------------ navigation */
 
-  const goToPreviousWeek = useCallback(
-    () => setWeekOffset((offset) => offset - 1),
+  const goToPreviousMonth = useCallback(
+    () => setMonthOffset((offset) => offset - 1),
     [],
   );
 
-  /** Forward stops at the current window — there is nothing after today. */
-  const goToNextWeek = useCallback(
-    () => setWeekOffset((offset) => Math.min(0, offset + 1)),
+  /** Forward stops at the current month — there is nothing after today. */
+  const goToNextMonth = useCallback(
+    () => setMonthOffset((offset) => Math.min(0, offset + 1)),
     [],
   );
 
-  const goToCurrentWeek = useCallback(() => setWeekOffset(0), []);
+  const goToCurrentMonth = useCallback(() => setMonthOffset(0), []);
 
   /* --------------------------------------------------------------- actions */
 
@@ -140,10 +140,10 @@ export const useTransactions = () => {
         onPress: () => handleAddPress("outcome"),
       },
       {
-        key: "this-week",
-        label: t("transactions.menu.thisWeek", "Jump to this week"),
-        onPress: goToCurrentWeek,
-        disabled: week.isCurrent,
+        key: "this-month",
+        label: t("transactions.menu.thisMonth", "Jump to this month"),
+        onPress: goToCurrentMonth,
+        disabled: month.isCurrent,
       },
       {
         key: "go-to-insights",
@@ -151,19 +151,19 @@ export const useTransactions = () => {
         onPress: () => router.push("/insights"),
       },
     ],
-    [goToCurrentWeek, handleAddPress, router, t, week.isCurrent],
+    [goToCurrentMonth, handleAddPress, month.isCurrent, router, t],
   );
 
   return {
     transactions,
-    weekTransactions,
+    monthTransactions,
     totals,
-    week,
+    month,
     isLoading,
     fetchTransactions,
-    goToPreviousWeek,
-    goToNextWeek,
-    goToCurrentWeek,
+    goToPreviousMonth,
+    goToNextMonth,
+    goToCurrentMonth,
     handleAddPress,
     handleDeletePress,
     handleConfirmDelete,

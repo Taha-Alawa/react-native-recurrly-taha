@@ -9,7 +9,7 @@ export type TransactionTotalsCardProps = {
 };
 
 /**
- * What the selected week came to.
+ * What the selected month came to.
  *
  * The subscriptions tile is a slice of the outcome tile, not a fourth column to
  * add up — it answers "how much of what I spent was not a choice this week".
@@ -24,7 +24,7 @@ const TransactionTotalsCard = ({ totals }: TransactionTotalsCardProps) => {
     <View className="tx-totals-card">
       <View className="tx-totals-head">
         <Text className="tx-totals-title">
-          {t("transactions.weekSummary", "This range")}
+          {t("transactions.totalsTitle", "Totals")}
         </Text>
         <Text
           className={clsx(

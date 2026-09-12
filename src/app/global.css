@@ -241,6 +241,14 @@
         @apply flex-1 font-sans-bold text-primary;
     }
 
+    .sub-edit {
+        @apply items-center rounded-full border border-primary py-4;
+    }
+
+    .sub-edit-text {
+        @apply font-sans-bold text-primary;
+    }
+
     .sub-cancel {
         @apply mt-2 items-center rounded-full bg-primary py-4;
     }
@@ -769,33 +777,12 @@
 
     /* ---------------------------------------------------------- transactions */
 
-    .tx-week-nav {
-        @apply flex-row items-center justify-between gap-3 rounded-2xl border border-border bg-card px-3 py-2;
-    }
 
-    .tx-week-button {
-        @apply size-9 shrink-0 items-center justify-center rounded-full bg-muted;
-    }
 
-    .tx-week-button-disabled {
-        @apply opacity-40;
-    }
 
-    .tx-week-button-text {
-        @apply text-base font-sans-bold text-primary;
-    }
 
-    .tx-week-copy {
-        @apply min-w-0 flex-1 items-center;
-    }
 
-    .tx-week-range {
-        @apply text-sm font-sans-bold text-primary;
-    }
 
-    .tx-week-label {
-        @apply mt-0.5 text-xs font-sans-semibold text-muted-foreground;
-    }
 
     .tx-totals-card {
         @apply my-4 gap-4 rounded-3xl border border-border bg-card p-5;
