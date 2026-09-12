@@ -1,5 +1,6 @@
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { File } from "expo-file-system";
 import { firebaseAuth, firebaseStorage } from "@/core/services/firebase";
 import authStore from "@/core/store/authStore";
 
@@ -49,13 +50,14 @@ const ProfileService = {
       );
     }
 
-    // React Native's fetch reads file:// URIs, which is how a local asset
-    // becomes something the Storage SDK can upload.
-    const response = await fetch(uri);
-    const blob = await response.blob();
+    // Since SDK 56 the global fetch is expo/fetch, which rejects file:// URIs
+    // and whose Response.blob() throws on native. Reading the picked asset
+    // through expo-file-system keeps local uploads working.
+    const file = new File(uri);
+    const bytes = await file.bytes();
 
     const storageRef = ref(firebaseStorage, `avatars/${user.uid}`);
-    await uploadBytes(storageRef, blob, { contentType: blob.type || "image/jpeg" });
+    await uploadBytes(storageRef, bytes, { contentType: file.type || "image/jpeg" });
 
     const photoURL = await getDownloadURL(storageRef);
     await updateProfile(user, { photoURL });

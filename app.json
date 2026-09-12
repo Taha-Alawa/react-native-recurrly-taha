@@ -7,7 +7,6 @@
     "icon": "./src/assets/images/icon.png",
     "scheme": "subly",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.tahaalawasteam.taha",
@@ -22,7 +21,6 @@
         "backgroundImage": "./src/assets/images/android-icon-background.png",
         "monochromeImage": "./src/assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.tahaalawasteam.taha"
     },
@@ -32,6 +30,9 @@
     },
     "plugins": [
       "expo-router",
+      "expo-image",
+      "expo-status-bar",
+      "expo-web-browser",
       [
         "expo-splash-screen",
         {
