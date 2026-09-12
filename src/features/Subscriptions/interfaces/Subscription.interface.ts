@@ -37,6 +37,8 @@ export interface Subscription extends SubscriptionDocument {
 export interface UpcomingSubscription {
   id: string;
   icon: ImageSourcePropType;
+  /** Carried through so the rail can tint a light glyph the way cards do. */
+  iconKey: IconKey;
   name: string;
   price: number;
   currency?: string;

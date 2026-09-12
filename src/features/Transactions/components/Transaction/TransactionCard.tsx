@@ -2,6 +2,7 @@ import { Image, Pressable, Text, View } from "react-native";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { iconTint } from "@/core/constants/icons";
 import { formatCurrency } from "@/core/utils/formatters";
 import type { Transaction } from "@/features/Transactions/interfaces/Transaction.interface";
 
@@ -16,7 +17,8 @@ export type TransactionCardProps = {
  */
 const TransactionCard = ({ transaction, onLongPress }: TransactionCardProps) => {
   const { t } = useTranslation();
-  const { type, name, amount, currency, date, origin, icon } = transaction;
+  const { type, name, amount, currency, date, origin, icon, iconKey } =
+    transaction;
 
   const isIncome = type === "income";
   const isSubscription = origin === "subscription";
@@ -39,7 +41,11 @@ const TransactionCard = ({ transaction, onLongPress }: TransactionCardProps) => 
         )}
       >
         {isSubscription ? (
-          <Image source={icon} className="tx-item-icon" />
+          <Image
+            source={icon}
+            className="tx-item-icon"
+            style={{ tintColor: iconTint(iconKey) }}
+          />
         ) : (
           <Text
             className={clsx(

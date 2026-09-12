@@ -110,6 +110,7 @@ export const deriveUpcoming = (
         {
           id: subscription.id,
           icon: subscription.icon,
+          iconKey: subscription.iconKey,
           name: subscription.name,
           price: subscription.price,
           currency: subscription.currency,

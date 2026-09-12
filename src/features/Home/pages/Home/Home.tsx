@@ -9,7 +9,6 @@ import { icons } from "@/core/constants/icons";
 import images from "@/core/constants/images";
 import useHome from "@/features/Home/hooks/useHome";
 import BalanceCard from "@/features/Balance/components/Balance/BalanceCard";
-import BalanceDialog from "@/features/Balance/components/Balance/BalanceDialog";
 import SubscriptionCard from "@/features/Subscriptions/components/Subscription/SubscriptionCard";
 import SubscriptionDialog from "@/features/Subscriptions/components/Subscription/SubscriptionDialog";
 import UpcomingSubscriptionCard from "@/features/Subscriptions/components/Upcoming/UpcomingSubscriptionCard";
@@ -23,9 +22,6 @@ const Home = () => {
     displayName,
     avatarUri,
     balanceAmount,
-    nextRenewalDate,
-    onEditBalance,
-    refreshBalance,
     subscriptions,
     upcomingSubscriptions,
     expandedId,
@@ -64,11 +60,7 @@ const Home = () => {
               </Pressable>
             </View>
 
-            <BalanceCard
-              amount={balanceAmount}
-              nextRenewalDate={nextRenewalDate}
-              onPress={onEditBalance}
-            />
+            <BalanceCard amount={balanceAmount} />
 
             <View>
               <ListHeading
@@ -117,7 +109,6 @@ const Home = () => {
       />
 
       <SubscriptionDialog onRefresh={refreshSubscriptions} />
-      <BalanceDialog onRefresh={refreshBalance} />
       <PaySubscriptionDialog
         visible={isPayDialogOpen}
         payload={payPayload}

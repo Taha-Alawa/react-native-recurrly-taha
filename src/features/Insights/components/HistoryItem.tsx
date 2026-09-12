@@ -1,6 +1,7 @@
 import { Image, Text, View } from "react-native";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import { iconTint } from "@/core/constants/icons";
 import { colors } from "@/core/theme/tokens";
 import { formatCurrency } from "@/core/utils/formatters";
 import { isYearly } from "@/features/Subscriptions/utils/subscriptionFormatters";
@@ -19,7 +20,11 @@ const HistoryItem = ({ subscription }: HistoryItemProps) => {
         className="insights-history-icon-wrap"
         style={{ backgroundColor: subscription.color ?? colors.muted }}
       >
-        <Image source={subscription.icon} className="insights-history-icon" />
+        <Image
+          source={subscription.icon}
+          className="insights-history-icon"
+          style={{ tintColor: iconTint(subscription.iconKey) }}
+        />
       </View>
 
       <View className="insights-history-copy">

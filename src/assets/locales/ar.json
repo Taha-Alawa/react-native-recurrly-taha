@@ -107,7 +107,6 @@
   },
   "home": {
     "balanceLabel": "الرصيد الإجمالي",
-    "nextRenewal": "التجديد القادم",
     "upcoming": "القادمة",
     "allSubscriptions": "كل الاشتراكات",
     "noUpcoming": "لا توجد تجديدات قادمة بعد.",
@@ -118,8 +117,6 @@
     "daysLeft_many": "{{count}} يومًا متبقيًا",
     "daysLeft_other": "{{count}} يوم متبقٍ",
     "lastDay": "اليوم الأخير",
-    "editBalance": "تعديل الرصيد الإجمالي",
-    "noRenewals": "لا توجد تجديدات قادمة",
     "pay": "ادفع",
     "payAccessibility": "ادفع {{name}}",
     "viewTransactions": "المعاملات",

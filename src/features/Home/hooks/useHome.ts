@@ -1,14 +1,21 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useRouter } from "expo-router";
 import authStore from "@/core/store/authStore";
 import { getDisplayName } from "@/core/utils/formatters";
 import useBalance from "@/features/Balance/hooks/Balance/useBalance";
 import useSubscriptions from "@/features/Subscriptions/hooks/Subscription/useSubscriptions";
-import { getNextRenewalDate } from "@/features/Subscriptions/utils/subscriptionFormatters";
 import useTransactionsCache from "@/features/Transactions/hooks/Transaction/useTransactionsCache";
 import useSubscriptionPayment from "@/features/Transactions/hooks/Transaction/useSubscriptionPayment";
 import type { UpcomingSubscription } from "@/features/Subscriptions/interfaces/Subscription.interface";
 
+/**
+ * Composition hook for the dashboard.
+ *
+ * Home is a composition feature: it owns no entity of its own, it arranges the
+ * public hooks of Balance, Subscriptions and Transactions. This is the same
+ * allowance §1 grants layouts for embedded widgets — see ARCHITECTURE.md for
+ * the deviation note.
+ */
 export const useHome = () => {
   const user = authStore.useStore();
   const router = useRouter();
@@ -26,11 +33,6 @@ export const useHome = () => {
   }, [balance, fetchTransactions, subscriptions]);
 
   const payment = useSubscriptionPayment({ onRefresh: refreshAll });
-
-  const nextRenewalDate = useMemo(
-    () => getNextRenewalDate(subscriptions.subscriptions),
-    [subscriptions.subscriptions],
-  );
 
   /**
    * The rail renders the projection, but paying needs the full subscription —
@@ -52,9 +54,6 @@ export const useHome = () => {
     avatarUri: user.photoURL,
 
     balanceAmount: balance.amount,
-    nextRenewalDate,
-    onEditBalance: balance.handleEditPress,
-    refreshBalance: balance.refreshBalance,
 
     subscriptions: subscriptions.subscriptions,
     upcomingSubscriptions: subscriptions.upcomingSubscriptions,

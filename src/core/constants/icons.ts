@@ -1,3 +1,4 @@
+import { colors } from "@/core/theme/tokens";
 import activity from "@/assets/icons/activity.png";
 import add from "@/assets/icons/add.png";
 import adobe from "@/assets/icons/adobe.png";
@@ -39,3 +40,27 @@ export const icons = {
 } as const;
 
 export type IconKey = keyof typeof icons;
+
+/**
+ * Icons drawn as white artwork, because they were made for the dark tab bar.
+ * Anywhere else — a card, any light surface — they disappear unless tinted.
+ *
+ * The brand logos are deliberately absent: those are navy artwork with white
+ * cut-outs (the Spotify bars, the Netflix notch), so tinting one would fill its
+ * cut-out in and flatten the logo into a solid blob.
+ */
+const LIGHT_ARTWORK: IconKey[] = ["home", "wallet", "setting", "activity"];
+
+/**
+ * The tintColor an icon needs on a light surface, or undefined when its own
+ * artwork already reads there. Pass the result straight to an Image style —
+ * undefined leaves the asset untouched.
+ *
+ * The wallet glyph matters most: it is the fallback icon and the default for
+ * every subscription added in the app, so without this most cards show nothing.
+ */
+export const iconTint = (
+  iconKey?: string,
+  color: string = colors.primary,
+): string | undefined =>
+  LIGHT_ARTWORK.includes(iconKey as IconKey) ? color : undefined;

@@ -1,6 +1,7 @@
 import { Image, Pressable, Text, View } from "react-native";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { iconTint } from "@/core/constants/icons";
 import { formatCurrency, formatDate } from "@/core/utils/formatters";
 import {
   formatMaskedPaymentMethod,
@@ -32,6 +33,7 @@ const SubscriptionCard = ({
     price,
     currency,
     icon,
+    iconKey,
     billing,
     color,
     category,
@@ -70,7 +72,11 @@ const SubscriptionCard = ({
     >
       <View className="sub-head">
         <View className="sub-main">
-          <Image className="sub-icon" source={icon} />
+          <Image
+            className="sub-icon"
+            source={icon}
+            style={{ tintColor: iconTint(iconKey) }}
+          />
           <View className="sub-copy">
             <Text className="sub-title" numberOfLines={1}>
               {name}

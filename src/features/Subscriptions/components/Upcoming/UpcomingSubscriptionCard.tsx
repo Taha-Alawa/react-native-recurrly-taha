@@ -1,6 +1,7 @@
 import { Image, Pressable, Text, View } from "react-native";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import { iconTint } from "@/core/constants/icons";
 import { formatCurrency } from "@/core/utils/formatters";
 import type { UpcomingSubscription } from "@/features/Subscriptions/interfaces/Subscription.interface";
 
@@ -14,7 +15,7 @@ const UpcomingSubscriptionCard = ({
   onPay,
 }: UpcomingSubscriptionCardProps) => {
   const { t } = useTranslation();
-  const { name, price, currency, daysLeft, icon, isOverdue, isPayable } =
+  const { name, price, currency, daysLeft, icon, iconKey, isOverdue, isPayable } =
     subscription;
 
   const timing = isOverdue
@@ -29,7 +30,11 @@ const UpcomingSubscriptionCard = ({
   return (
     <View className={clsx("upcoming-card", isOverdue && "upcoming-card-overdue")}>
       <View className="upcoming-row">
-        <Image source={icon} className="upcoming-icon" />
+        <Image
+          source={icon}
+          className="upcoming-icon"
+          style={{ tintColor: iconTint(iconKey) }}
+        />
         {/* min-w-0 + flex-1 lets this column shrink instead of overflowing the
             card — Arabic renders these strings far wider than English. */}
         <View className="upcoming-copy">

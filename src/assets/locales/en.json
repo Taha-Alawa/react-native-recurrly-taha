@@ -104,7 +104,6 @@
   },
   "home": {
     "balanceLabel": "Total balance",
-    "nextRenewal": "Next renewal",
     "upcoming": "Upcoming",
     "allSubscriptions": "All Subscriptions",
     "noUpcoming": "No upcoming renewals yet.",
@@ -112,8 +111,6 @@
     "daysLeft_one": "{{count}} day left",
     "daysLeft_other": "{{count}} days left",
     "lastDay": "Last day",
-    "editBalance": "Edit total balance",
-    "noRenewals": "No upcoming renewals",
     "pay": "Pay",
     "payAccessibility": "Pay {{name}}",
     "viewTransactions": "Transactions",
