@@ -21,7 +21,18 @@
       "info": "Notice",
       "warn": "Warning",
       "error": "Something went wrong"
-    }
+    },
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "weekdays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ]
   },
   "categories": {
     "Entertainment": "Entertainment",
@@ -36,8 +47,9 @@
   "tabs": {
     "home": "Home",
     "subscriptions": "Subscriptions",
-    "insights": "Insights",
-    "settings": "Settings"
+    "settings": "Settings",
+    "transactions": "Transactions",
+    "dashboard": "Dashboard"
   },
   "auth": {
     "wordmarkSub": "Smart Billing",
@@ -101,7 +113,6 @@
   },
   "home": {
     "balanceLabel": "Total balance",
-    "nextRenewal": "Next renewal",
     "upcoming": "Upcoming",
     "allSubscriptions": "All Subscriptions",
     "noUpcoming": "No upcoming renewals yet.",
@@ -109,20 +120,18 @@
     "daysLeft_one": "{{count}} day left",
     "daysLeft_other": "{{count}} days left",
     "lastDay": "Last day",
-    "editBalance": "Edit total balance",
-    "noRenewals": "No upcoming renewals"
+    "pay": "Pay",
+    "payAccessibility": "Pay {{name}}",
+    "viewTransactions": "Transactions",
+    "overdueDays_one": "{{count}} day overdue",
+    "overdueDays_other": "{{count}} days overdue"
   },
   "subscriptions": {
     "title": "My Subscriptions",
     "searchPlaceholder": "Search subscriptions...",
     "noResults": "No subscriptions found.",
-    "manage": "Manage",
-    "change": "Change",
-    "paymentInfo": "Payment info:",
-    "planDetails": "Plan details:",
     "cancelling": "Cancelling…",
     "cancelSubscription": "Cancel Subscription",
-    "payment": "Payment:",
     "category": "Category:",
     "started": "Started:",
     "renewalDate": "Renewal Date:",
@@ -132,35 +141,11 @@
       "addSubscription": "Add subscription",
       "hideCancelled": "Hide cancelled",
       "showCancelled": "Show cancelled",
-      "goToInsights": "View insights"
+      "goToInsights": "View dashboard"
     },
     "cancelSuccess": "Subscription cancelled.",
-    "cancelConfirm": "Cancel {{name}}? This cannot be undone."
-  },
-  "insights": {
-    "title": "Monthly Insights",
-    "upcoming": "Upcoming",
-    "expenses": "Expenses",
-    "history": "History",
-    "noHistory": "No subscription history yet.",
-    "noHistoryInRange": "No subscriptions in the selected date range.",
-    "perYear": "per year",
-    "perMonth": "per month",
-    "weekdays": [
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat",
-      "Sun"
-    ],
-    "menu": {
-      "title": "Insights options",
-      "filterHistory": "Filter history by date",
-      "clearFilter": "Clear date filter",
-      "goToSubscriptions": "View subscriptions"
-    }
+    "cancelConfirm": "Cancel {{name}}? This cannot be undone.",
+    "editSubscription": "Edit Subscription"
   },
   "settings": {
     "signOut": "Sign out",
@@ -197,13 +182,14 @@
     "updateBalance": {
       "title": "Update Balance",
       "currentLabel": "Current balance",
-      "amountLabel": "New balance",
+      "amountLabel": "Starting balance",
       "amountPlaceholder": "e.g. 2489.48",
       "submit": "Save Balance",
       "errors": {
         "amountInvalid": "Enter a valid amount of 0 or more."
       },
-      "success": "Balance updated."
+      "success": "Balance updated.",
+      "breakdown": "{{starting}} starting {{movement}} from transactions"
     },
     "dateRange": {
       "title": "Select Date Range",
@@ -232,6 +218,29 @@
         "nameRequired": "Enter a username.",
         "nameTooShort": "Username must be at least 2 characters."
       }
+    },
+    "createTransaction": {
+      "incomeTitle": "New Income",
+      "outcomeTitle": "New Expense",
+      "typeLabel": "Type",
+      "nameLabel": "Transaction",
+      "namePlaceholder": "e.g. Supermarket",
+      "sourceLabel": "Source",
+      "sourcePlaceholder": "e.g. Salary",
+      "amountLabel": "Amount",
+      "amountPlaceholder": "e.g. 24.90",
+      "dateLabel": "Date",
+      "datePlaceholder": "Pick a date",
+      "submitIncome": "Add Income",
+      "submitOutcome": "Add Expense",
+      "submitting": "Saving…",
+      "incomeSuccess": "Income added.",
+      "outcomeSuccess": "Expense added.",
+      "errors": {
+        "nameRequired": "Enter what this was for.",
+        "amountInvalid": "Enter a valid amount greater than 0.",
+        "dateRequired": "Pick a date."
+      }
     }
   },
   "subscriptionDetail": {
@@ -251,6 +260,109 @@
       "default": "Something went wrong. Please try again.",
       "not-configured": "Firebase isn't configured. Add the EXPO_PUBLIC_FIREBASE_* values to .env and restart.",
       "no-session": "You're signed out. Sign in again to continue."
+    }
+  },
+  "transactions": {
+    "title": "Transactions",
+    "listTitle": "Activity",
+    "income": "Income",
+    "outcome": "Expense",
+    "addIncome": "+ Income",
+    "addOutcome": "- Expense",
+    "totalIncome": "Income",
+    "totalOutcome": "Expenses",
+    "totalSubscriptions": "Subs",
+    "ofOutcome": "of expenses",
+    "subscriptionTag": "Subscription",
+    "rowAccessibility": "{{name}}. Hold to delete.",
+    "empty": "Nothing recorded this month yet.",
+    "emptyPast": "Nothing recorded in this month.",
+    "delete": "Delete",
+    "deleteTitle": "Delete Transaction",
+    "deleteConfirm": "Delete {{name}}? Your balance will be recalculated without it.",
+    "deleteSuccess": "Transaction deleted.",
+    "payTitle": "Record Payment",
+    "payConfirm": "Pay {{amount}} for {{name}}? It comes off your balance and the next renewal moves to {{date}}.",
+    "payConfirmLabel": "Pay now",
+    "paySuccess": "{{name}} paid. Next renewal {{date}}.",
+    "menu": {
+      "title": "Transaction options",
+      "addIncome": "Add income",
+      "addOutcome": "Add expense",
+      "goToInsights": "View dashboard",
+      "thisMonth": "Jump to this month"
+    },
+    "totalsTitle": "Totals",
+    "thisMonth": "This month",
+    "monthsAgo_one": "{{count}} month ago",
+    "monthsAgo_other": "{{count}} months ago",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month"
+  },
+  "transactionNames": {
+    "Salary": "Salary",
+    "Freelance": "Freelance",
+    "Refund": "Refund",
+    "Gift": "Gift",
+    "Investment": "Investment",
+    "Supermarket": "Supermarket",
+    "Restaurant": "Restaurant",
+    "Online Shopping": "Online Shopping",
+    "Transport": "Transport",
+    "Bills": "Bills",
+    "Health": "Health",
+    "Other": "Other"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "year": "Year",
+    "month": "Month",
+    "thisYear": "This year",
+    "thisMonth": "This month",
+    "previousPeriod": "Previous period",
+    "nextPeriod": "Next period",
+    "income": "Income",
+    "outcome": "Expenses",
+    "subscriptions": "Subscriptions",
+    "ofOutcome": "of expenses",
+    "saved": "Saved",
+    "overspent": "Overspent",
+    "cashflow": "Income vs Expenses",
+    "bucketAccessibility": "{{period}}: {{income}} in, {{outcome}} out",
+    "rates": "Rates & extremes",
+    "savingsRate": "Savings rate",
+    "ofIncomeKept": "of income kept",
+    "noIncome": "No income recorded",
+    "avgIncome": "Average income",
+    "avgOutcome": "Average expenses",
+    "perMonth": "per month",
+    "perWeek": "per week",
+    "bestPeriod": "Best",
+    "worstPeriod": "Worst",
+    "topSpending": "Top spending",
+    "noSpending": "No spending recorded in this period.",
+    "spendingCaption_one": "{{share}}% of expenses · {{count}} transaction",
+    "spendingCaption_other": "{{share}}% of expenses · {{count}} transactions",
+    "commitment": "Subscription commitment",
+    "annualCommitment": "Annual commitment",
+    "monthlyCommitment": "Monthly commitment",
+    "activeCount_one": "{{count}} active subscription",
+    "activeCount_other": "{{count}} active subscriptions",
+    "paidSoFar": "Paid in this period",
+    "stillToCome": "Still to come",
+    "projectionNote": "No subscription payments recorded here — this is what today's prices would cost, not money that moved.",
+    "byCost": "Subscriptions by yearly cost",
+    "noSubscriptions": "No active subscriptions.",
+    "subscriptionCaption": "{{monthly}}/mo · {{share}}% of your subscriptions",
+    "byCategory": "By category",
+    "menu": {
+      "title": "Dashboard options",
+      "showMonth": "Switch to month view",
+      "showYear": "Switch to year view",
+      "thisYear": "Jump to this year",
+      "thisMonth": "Jump to this month",
+      "goToTransactions": "View transactions",
+      "goToSubscriptions": "View subscriptions"
     }
   }
 }

@@ -16,12 +16,17 @@ service cloud.firestore {
       return request.auth != null && request.auth.uid == userId;
     }
 
-    // users/{userId} — holds the balance field.
+    // users/{userId} — holds the starting balance field.
     match /users/{userId} {
       allow read, write: if isOwner(userId);
 
       // users/{userId}/subscriptions/{subscriptionId}
       match /subscriptions/{subscriptionId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // users/{userId}/transactions/{transactionId}
+      match /transactions/{transactionId} {
         allow read, write: if isOwner(userId);
       }
     }

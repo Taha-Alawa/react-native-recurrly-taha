@@ -8,12 +8,12 @@ import {
 } from "@/features/Balance/schemas/Balance/BalanceSchema";
 
 export type UseBalanceFormOptions = {
-  currentAmount: number;
+  seedAmount: number;
   onSubmit: (values: BalanceFormValues) => void | Promise<void>;
 };
 
 export const useBalanceForm = ({
-  currentAmount,
+  seedAmount,
   onSubmit,
 }: UseBalanceFormOptions) => {
   const { i18n } = useTranslation();
@@ -27,11 +27,9 @@ export const useBalanceForm = ({
 
   const { reset } = form;
 
-  // Seed the field from the balance being edited, so the sheet opens showing
-  // the current value rather than an empty box.
   useEffect(() => {
-    reset({ amount: String(currentAmount) });
-  }, [currentAmount, reset]);
+    reset({ amount: String(seedAmount) });
+  }, [seedAmount, reset]);
 
   return form;
 };

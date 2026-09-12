@@ -1,13 +1,22 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import dialogStore from "@/core/store/dialogStore";
 import BalanceService from "@/features/Balance/services/BalanceService";
 import balanceCache from "@/features/Balance/hooks/Balance/balanceCache";
+import useTransactionsCache from "@/features/Transactions/hooks/Transaction/useTransactionsCache";
+import { sumNet } from "@/features/Transactions/utils/transactionCalculations";
 
 export const UPDATE_BALANCE_DIALOG = "updateBalance";
 
-/** List-hook equivalent for a single-value resource (architecture §4.3a). */
 export const useBalance = () => {
-  const { amount, isLoading, isLoaded } = balanceCache.useStore();
+  const {
+    amount: startingAmount,
+    isLoading,
+    isLoaded,
+  } = balanceCache.useStore();
+  const { transactions, fetchTransactions } = useTransactionsCache();
+
+  const transactionsNet = useMemo(() => sumNet(transactions), [transactions]);
+  const amount = startingAmount + transactionsNet;
 
   const fetchBalance = useCallback(async () => {
     balanceCache.setState({ isLoading: true });
@@ -24,11 +33,25 @@ export const useBalance = () => {
     if (!isLoaded) void fetchBalance();
   }, [isLoaded, fetchBalance]);
 
-  const handleEditPress = useCallback(() => {
-    dialogStore.open(UPDATE_BALANCE_DIALOG, "update", { data: { amount } });
-  }, [amount]);
+  const refreshBalance = useCallback(async () => {
+    await Promise.all([fetchBalance(), fetchTransactions()]);
+  }, [fetchBalance, fetchTransactions]);
 
-  return { amount, isLoading, fetchBalance, handleEditPress };
+  const handleEditPress = useCallback(() => {
+    dialogStore.open(UPDATE_BALANCE_DIALOG, "update", {
+      data: { startingAmount },
+    });
+  }, [startingAmount]);
+
+  return {
+    amount,
+    startingAmount,
+    transactionsNet,
+    isLoading,
+    fetchBalance,
+    refreshBalance,
+    handleEditPress,
+  };
 };
 
 export default useBalance;

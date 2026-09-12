@@ -7,13 +7,24 @@ export type BalanceDialogProps = {
 };
 
 const BalanceDialog = ({ onRefresh }: BalanceDialogProps) => {
-  const { isOpen, currentAmount, title, onSubmit, close } = useBalanceDialog({
-    onRefresh,
-  });
+  const {
+    isOpen,
+    startingAmount,
+    currentAmount,
+    transactionsNet,
+    title,
+    onSubmit,
+    close,
+  } = useBalanceDialog({ onRefresh });
 
   return (
     <DialogShell visible={isOpen} title={title} onClose={close} avoidKeyboard>
-      <BalanceForm currentAmount={currentAmount} onSubmit={onSubmit} />
+      <BalanceForm
+        startingAmount={startingAmount}
+        currentAmount={currentAmount}
+        transactionsNet={transactionsNet}
+        onSubmit={onSubmit}
+      />
     </DialogShell>
   );
 };

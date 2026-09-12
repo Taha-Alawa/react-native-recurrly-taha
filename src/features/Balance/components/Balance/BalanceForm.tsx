@@ -9,16 +9,25 @@ import type { BalanceFormValues } from "@/features/Balance/schemas/Balance/Balan
 const BALANCE_ACCESSORY_ID = "balance-decimal-pad-accessory";
 
 export type BalanceFormProps = {
+  startingAmount: number;
   currentAmount: number;
+  transactionsNet: number;
   onSubmit: (values: BalanceFormValues) => void | Promise<void>;
 };
 
-const BalanceForm = ({ currentAmount, onSubmit }: BalanceFormProps) => {
+const BalanceForm = ({
+  startingAmount,
+  currentAmount,
+  transactionsNet,
+  onSubmit,
+}: BalanceFormProps) => {
   const { t } = useTranslation();
   const { values, errors, submitting, setField, handleSubmit } = useBalanceForm({
-    currentAmount,
+    seedAmount: startingAmount,
     onSubmit,
   });
+
+  const hasTransactions = transactionsNet !== 0;
 
   return (
     <>
@@ -29,10 +38,21 @@ const BalanceForm = ({ currentAmount, onSubmit }: BalanceFormProps) => {
         <Text className="calendar-summary-value" numberOfLines={1}>
           {formatCurrency(currentAmount)}
         </Text>
+        {hasTransactions && (
+          <Text className="auth-helper" numberOfLines={1}>
+            {t("modal.updateBalance.breakdown", {
+              starting: formatCurrency(startingAmount),
+              movement: `${transactionsNet > 0 ? "+" : "−"}${formatCurrency(
+                Math.abs(transactionsNet),
+              )}`,
+              defaultValue: "{{starting}} starting {{movement}} from transactions",
+            })}
+          </Text>
+        )}
       </View>
 
       <TextField
-        label={t("modal.updateBalance.amountLabel", "New balance")}
+        label={t("modal.updateBalance.amountLabel", "Starting balance")}
         placeholder={t("modal.updateBalance.amountPlaceholder", "e.g. 2489.48")}
         value={values.amount}
         onChangeText={(value) => setField("amount", value)}

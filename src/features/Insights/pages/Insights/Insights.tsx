@@ -1,33 +1,43 @@
-import { FlatList, Pressable, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { styled } from "nativewind";
-import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import ScreenHeader from "@/core/components/Navigation/ScreenHeader";
 import ScreenMenuSheet from "@/core/components/Navigation/ScreenMenuSheet";
 import ListHeading from "@/core/components/Navigation/ListHeading";
-import EmptyState from "@/core/components/Feedback/EmptyState";
-import DateRangePicker from "@/core/components/Inputs/DateRangePicker";
-import { formatCurrency } from "@/core/utils/formatters";
 import useInsights from "@/features/Insights/hooks/useInsights";
-import ExpenseChart from "@/features/Insights/components/ExpenseChart";
-import HistoryItem from "@/features/Insights/components/HistoryItem";
+import PeriodNavigator from "@/features/Insights/components/PeriodNavigator";
+import SummaryTiles from "@/features/Insights/components/SummaryTiles";
+import CashflowChart from "@/features/Insights/components/CashflowChart";
+import AveragesCard from "@/features/Insights/components/AveragesCard";
+import TopSpendingList from "@/features/Insights/components/TopSpendingList";
+import CommitmentCard from "@/features/Insights/components/CommitmentCard";
+import SubscriptionCostList from "@/features/Insights/components/SubscriptionCostList";
+import CategorySplit from "@/features/Insights/components/CategorySplit";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
+/**
+ * A plain ScrollView rather than a FlatList: every section is a different shape
+ * and there is no long homogeneous list left to virtualise.
+ */
 const Insights = () => {
   const { t } = useTranslation();
   const {
-    weekDays,
-    maxWeekTotal,
-    monthlyExpenses,
-    filteredHistory,
-    historyRange,
-    handleApplyRange,
-    clearRange,
-    isRangePickerOpen,
-    openRangePicker,
-    closeRangePicker,
+    period,
+    changeMode,
+    goToPrevious,
+    goToNext,
+    totals,
+    buckets,
+    maxBucket,
+    selectedBucket,
+    selectBucket,
+    averages,
+    topSpending,
+    subscriptionCosts,
+    categoryShares,
+    commitment,
     isMenuOpen,
     openMenu,
     closeMenu,
@@ -35,80 +45,84 @@ const Insights = () => {
   } = useInsights();
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <FlatList
-        data={filteredHistory}
-        keyExtractor={(item) => item.id}
+    <SafeAreaView className="flex-1 bg-background p-5">
+      <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerClassName="p-5 pb-30"
-        ListHeaderComponent={
+        contentContainerClassName="pb-30"
+      >
+        <ScreenHeader
+          title={t("dashboard.title", "Dashboard")}
+          onMenuPress={openMenu}
+        />
+
+        <PeriodNavigator
+          period={period}
+          onModeChange={changeMode}
+          onPrevious={goToPrevious}
+          onNext={goToNext}
+        />
+
+        <SummaryTiles totals={totals} />
+
+        <ListHeading
+          title={t("dashboard.cashflow", "Income vs Expenses")}
+          showAction={false}
+        />
+
+        <CashflowChart
+          buckets={buckets}
+          maxValue={maxBucket}
+          selected={selectedBucket}
+          onSelect={selectBucket}
+          periodLabel={period.label}
+          periodIncome={totals.income}
+          periodOutcome={totals.outcome}
+        />
+
+        <ListHeading
+          title={t("dashboard.rates", "Rates & extremes")}
+          showAction={false}
+        />
+
+        <AveragesCard averages={averages} period={period} />
+
+        <ListHeading
+          title={t("dashboard.topSpending", "Top spending")}
+          showAction={false}
+        />
+
+        <TopSpendingList entries={topSpending} />
+
+        <ListHeading
+          title={t("dashboard.commitment", "Subscription commitment")}
+          showAction={false}
+        />
+
+        <CommitmentCard commitment={commitment} period={period} />
+
+        <ListHeading
+          title={t("dashboard.byCost", "Subscriptions by yearly cost")}
+          showAction={false}
+        />
+
+        <SubscriptionCostList costs={subscriptionCosts} />
+
+        {categoryShares.length > 0 && (
           <>
-            <ScreenHeader
-              title={t("insights.title", "Monthly Insights")}
-              onMenuPress={openMenu}
-            />
-
-            <ListHeading title={t("insights.upcoming", "Upcoming")} showAction={false} />
-
-            <ExpenseChart weekDays={weekDays} maxTotal={maxWeekTotal} />
-
-            <View className="insights-expenses-card">
-              <View className="min-w-0 flex-1">
-                <Text className="insights-expenses-title">
-                  {t("insights.expenses", "Expenses")}
-                </Text>
-                <Text className="insights-expenses-meta">
-                  {dayjs().format("MMMM YYYY")}
-                </Text>
-              </View>
-              <Text className="insights-expenses-amount" numberOfLines={1}>
-                -{formatCurrency(monthlyExpenses)}
-              </Text>
-            </View>
-
             <ListHeading
-              title={t("insights.history", "History")}
-              onActionPress={openRangePicker}
+              title={t("dashboard.byCategory", "By category")}
+              showAction={false}
             />
-
-            {historyRange && (
-              <View className="filter-chip-row">
-                <Pressable className="filter-chip" onPress={clearRange}>
-                  <Text className="filter-chip-text" numberOfLines={1}>
-                    {dayjs(historyRange.startDate).format("MMM D, YYYY")}
-                    {" – "}
-                    {dayjs(historyRange.endDate).format("MMM D, YYYY")}
-                  </Text>
-                  <Text className="filter-chip-clear">✕</Text>
-                </Pressable>
-              </View>
-            )}
+            <CategorySplit shares={categoryShares} />
           </>
-        }
-        renderItem={({ item }) => <HistoryItem subscription={item} />}
-        ItemSeparatorComponent={() => <View className="h-3" />}
-        ListEmptyComponent={
-          <EmptyState
-            message={
-              historyRange
-                ? t("insights.noHistoryInRange", "No subscriptions in the selected date range.")
-                : t("insights.noHistory", "No subscription history yet.")
-            }
-          />
-        }
-      />
+        )}
 
-      <DateRangePicker
-        visible={isRangePickerOpen}
-        initialRange={historyRange}
-        onClose={closeRangePicker}
-        onApply={handleApplyRange}
-        onClear={clearRange}
-      />
+        <View className="h-4" />
+      </ScrollView>
 
       <ScreenMenuSheet
         visible={isMenuOpen}
-        title={t("insights.menu.title", "Insights options")}
+        title={t("dashboard.menu.title", "Dashboard options")}
         actions={menuActions}
         onClose={closeMenu}
       />

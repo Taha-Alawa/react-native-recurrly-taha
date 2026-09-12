@@ -24,7 +24,18 @@
       "info": "تنبيه",
       "warn": "تحذير",
       "error": "حدث خطأ ما"
-    }
+    },
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "weekdays": [
+      "اثنين",
+      "ثلاثاء",
+      "أربعاء",
+      "خميس",
+      "جمعة",
+      "سبت",
+      "أحد"
+    ]
   },
   "categories": {
     "Entertainment": "ترفيه",
@@ -39,8 +50,9 @@
   "tabs": {
     "home": "الرئيسية",
     "subscriptions": "الاشتراكات",
-    "insights": "التحليلات",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "transactions": "المعاملات",
+    "dashboard": "لوحة المعلومات"
   },
   "auth": {
     "wordmarkSub": "فوترة ذكية",
@@ -104,7 +116,6 @@
   },
   "home": {
     "balanceLabel": "الرصيد الإجمالي",
-    "nextRenewal": "التجديد القادم",
     "upcoming": "القادمة",
     "allSubscriptions": "كل الاشتراكات",
     "noUpcoming": "لا توجد تجديدات قادمة بعد.",
@@ -115,20 +126,21 @@
     "daysLeft_many": "{{count}} يومًا متبقيًا",
     "daysLeft_other": "{{count}} يوم متبقٍ",
     "lastDay": "اليوم الأخير",
-    "editBalance": "تعديل الرصيد الإجمالي",
-    "noRenewals": "لا توجد تجديدات قادمة"
+    "pay": "ادفع",
+    "payAccessibility": "ادفع {{name}}",
+    "viewTransactions": "المعاملات",
+    "overdueDays_one": "متأخر يومًا واحدًا",
+    "overdueDays_two": "متأخر يومين",
+    "overdueDays_few": "متأخر {{count}} أيام",
+    "overdueDays_many": "متأخر {{count}} يومًا",
+    "overdueDays_other": "متأخر {{count}} يوم"
   },
   "subscriptions": {
     "title": "اشتراكاتي",
     "searchPlaceholder": "ابحث في الاشتراكات...",
     "noResults": "لم يتم العثور على اشتراكات.",
-    "manage": "إدارة",
-    "change": "تغيير",
-    "paymentInfo": "معلومات الدفع:",
-    "planDetails": "تفاصيل الخطة:",
     "cancelling": "جارٍ الإلغاء…",
     "cancelSubscription": "إلغاء الاشتراك",
-    "payment": "الدفع:",
     "category": "الفئة:",
     "started": "بدأ في:",
     "renewalDate": "تاريخ التجديد:",
@@ -138,35 +150,11 @@
       "addSubscription": "إضافة اشتراك",
       "hideCancelled": "إخفاء الملغاة",
       "showCancelled": "إظهار الملغاة",
-      "goToInsights": "عرض التحليلات"
+      "goToInsights": "عرض لوحة المعلومات"
     },
     "cancelSuccess": "تم إلغاء الاشتراك.",
-    "cancelConfirm": "إلغاء {{name}}؟ لا يمكن التراجع عن هذا."
-  },
-  "insights": {
-    "title": "تحليلات شهرية",
-    "upcoming": "القادمة",
-    "expenses": "المصروفات",
-    "history": "السجل",
-    "noHistory": "لا يوجد سجل اشتراكات بعد.",
-    "noHistoryInRange": "لا توجد اشتراكات ضمن النطاق الزمني المحدد.",
-    "perYear": "سنويًا",
-    "perMonth": "شهريًا",
-    "weekdays": [
-      "اثنين",
-      "ثلاثاء",
-      "أربعاء",
-      "خميس",
-      "جمعة",
-      "سبت",
-      "أحد"
-    ],
-    "menu": {
-      "title": "خيارات التحليلات",
-      "filterHistory": "تصفية السجل حسب التاريخ",
-      "clearFilter": "مسح تصفية التاريخ",
-      "goToSubscriptions": "عرض الاشتراكات"
-    }
+    "cancelConfirm": "إلغاء {{name}}؟ لا يمكن التراجع عن هذا.",
+    "editSubscription": "تعديل الاشتراك"
   },
   "settings": {
     "signOut": "تسجيل الخروج",
@@ -203,13 +191,14 @@
     "updateBalance": {
       "title": "تحديث الرصيد",
       "currentLabel": "الرصيد الحالي",
-      "amountLabel": "الرصيد الجديد",
+      "amountLabel": "الرصيد الابتدائي",
       "amountPlaceholder": "مثال: 2489.48",
       "submit": "حفظ الرصيد",
       "errors": {
         "amountInvalid": "أدخل مبلغًا صالحًا لا يقل عن 0."
       },
-      "success": "تم تحديث الرصيد."
+      "success": "تم تحديث الرصيد.",
+      "breakdown": "{{starting}} ابتدائي {{movement}} من المعاملات"
     },
     "dateRange": {
       "title": "اختر النطاق الزمني",
@@ -238,6 +227,29 @@
         "nameRequired": "أدخل اسم مستخدم.",
         "nameTooShort": "يجب ألا يقل اسم المستخدم عن حرفين."
       }
+    },
+    "createTransaction": {
+      "incomeTitle": "دخل جديد",
+      "outcomeTitle": "مصروف جديد",
+      "typeLabel": "النوع",
+      "nameLabel": "المعاملة",
+      "namePlaceholder": "مثال: سوبرماركت",
+      "sourceLabel": "المصدر",
+      "sourcePlaceholder": "مثال: راتب",
+      "amountLabel": "المبلغ",
+      "amountPlaceholder": "مثال: 24.90",
+      "dateLabel": "التاريخ",
+      "datePlaceholder": "اختر تاريخًا",
+      "submitIncome": "إضافة دخل",
+      "submitOutcome": "إضافة مصروف",
+      "submitting": "جارٍ الحفظ…",
+      "incomeSuccess": "تمت إضافة الدخل.",
+      "outcomeSuccess": "تمت إضافة المصروف.",
+      "errors": {
+        "nameRequired": "أدخل سبب المعاملة.",
+        "amountInvalid": "أدخل مبلغًا صحيحًا أكبر من 0.",
+        "dateRequired": "اختر تاريخًا."
+      }
     }
   },
   "subscriptionDetail": {
@@ -257,6 +269,118 @@
       "default": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
       "not-configured": "لم يتم إعداد Firebase. أضف قيم EXPO_PUBLIC_FIREBASE_* إلى ملف env. وأعد التشغيل.",
       "no-session": "تم تسجيل خروجك. سجّل الدخول مرة أخرى للمتابعة."
+    }
+  },
+  "transactions": {
+    "title": "المعاملات",
+    "listTitle": "النشاط",
+    "income": "دخل",
+    "outcome": "مصروف",
+    "addIncome": "+ دخل",
+    "addOutcome": "- مصروف",
+    "totalIncome": "الدخل",
+    "totalOutcome": "المصروفات",
+    "totalSubscriptions": "الاشتراكات",
+    "ofOutcome": "من المصروفات",
+    "subscriptionTag": "اشتراك",
+    "rowAccessibility": "{{name}}. اضغط مطولًا للحذف.",
+    "empty": "لا توجد معاملات هذا الشهر بعد.",
+    "emptyPast": "لا توجد معاملات في هذا الشهر.",
+    "delete": "حذف",
+    "deleteTitle": "حذف المعاملة",
+    "deleteConfirm": "حذف {{name}}؟ سيُعاد حساب رصيدك بدونها.",
+    "deleteSuccess": "تم حذف المعاملة.",
+    "payTitle": "تسجيل دفعة",
+    "payConfirm": "دفع {{amount}} لـ {{name}}؟ سيُخصم من رصيدك وينتقل التجديد القادم إلى {{date}}.",
+    "payConfirmLabel": "ادفع الآن",
+    "paySuccess": "تم دفع {{name}}. التجديد القادم {{date}}.",
+    "menu": {
+      "title": "خيارات المعاملات",
+      "addIncome": "إضافة دخل",
+      "addOutcome": "إضافة مصروف",
+      "goToInsights": "عرض لوحة المعلومات",
+      "thisMonth": "الانتقال إلى هذا الشهر"
+    },
+    "totalsTitle": "الإجماليات",
+    "thisMonth": "هذا الشهر",
+    "monthsAgo_one": "قبل شهر",
+    "monthsAgo_two": "قبل شهرين",
+    "monthsAgo_few": "قبل {{count}} أشهر",
+    "monthsAgo_many": "قبل {{count}} شهرًا",
+    "monthsAgo_other": "قبل {{count}} شهر",
+    "previousMonth": "الشهر السابق",
+    "nextMonth": "الشهر التالي"
+  },
+  "transactionNames": {
+    "Salary": "راتب",
+    "Freelance": "عمل حر",
+    "Refund": "استرداد",
+    "Gift": "هدية",
+    "Investment": "استثمار",
+    "Supermarket": "سوبرماركت",
+    "Restaurant": "مطعم",
+    "Online Shopping": "تسوق إلكتروني",
+    "Transport": "مواصلات",
+    "Bills": "فواتير",
+    "Health": "صحة",
+    "Other": "أخرى"
+  },
+  "dashboard": {
+    "title": "لوحة المعلومات",
+    "year": "سنة",
+    "month": "شهر",
+    "thisYear": "هذه السنة",
+    "thisMonth": "هذا الشهر",
+    "previousPeriod": "الفترة السابقة",
+    "nextPeriod": "الفترة التالية",
+    "income": "الدخل",
+    "outcome": "المصروفات",
+    "subscriptions": "الاشتراكات",
+    "ofOutcome": "من المصروفات",
+    "saved": "المُدخر",
+    "overspent": "تجاوز الإنفاق",
+    "cashflow": "الدخل مقابل المصروفات",
+    "bucketAccessibility": "{{period}}: {{income}} دخل، {{outcome}} مصروف",
+    "rates": "المعدلات والحدود",
+    "savingsRate": "نسبة الادخار",
+    "ofIncomeKept": "من الدخل محتفظ به",
+    "noIncome": "لا يوجد دخل مسجل",
+    "avgIncome": "متوسط الدخل",
+    "avgOutcome": "متوسط المصروفات",
+    "perMonth": "شهريًا",
+    "perWeek": "أسبوعيًا",
+    "bestPeriod": "الأفضل",
+    "worstPeriod": "الأسوأ",
+    "topSpending": "أعلى المصروفات",
+    "noSpending": "لا توجد مصروفات مسجلة في هذه الفترة.",
+    "spendingCaption_one": "{{share}}% من المصروفات · معاملة واحدة",
+    "spendingCaption_two": "{{share}}% من المصروفات · معاملتان",
+    "spendingCaption_few": "{{share}}% من المصروفات · {{count}} معاملات",
+    "spendingCaption_many": "{{share}}% من المصروفات · {{count}} معاملة",
+    "spendingCaption_other": "{{share}}% من المصروفات · {{count}} معاملة",
+    "commitment": "التزام الاشتراكات",
+    "annualCommitment": "الالتزام السنوي",
+    "monthlyCommitment": "الالتزام الشهري",
+    "activeCount_one": "اشتراك نشط واحد",
+    "activeCount_two": "اشتراكان نشطان",
+    "activeCount_few": "{{count}} اشتراكات نشطة",
+    "activeCount_many": "{{count}} اشتراكًا نشطًا",
+    "activeCount_other": "{{count}} اشتراك نشط",
+    "paidSoFar": "المدفوع في هذه الفترة",
+    "stillToCome": "المتبقي",
+    "projectionNote": "لا توجد مدفوعات اشتراكات مسجلة هنا — هذا ما ستكلفه الأسعار الحالية، وليس مبالغ تم دفعها فعليًا.",
+    "byCost": "الاشتراكات حسب التكلفة السنوية",
+    "noSubscriptions": "لا توجد اشتراكات نشطة.",
+    "subscriptionCaption": "{{monthly}}/شهر · {{share}}% من اشتراكاتك",
+    "byCategory": "حسب الفئة",
+    "menu": {
+      "title": "خيارات لوحة المعلومات",
+      "showMonth": "التبديل إلى عرض الشهر",
+      "showYear": "التبديل إلى عرض السنة",
+      "thisYear": "الانتقال إلى هذه السنة",
+      "thisMonth": "الانتقال إلى هذا الشهر",
+      "goToTransactions": "عرض المعاملات",
+      "goToSubscriptions": "عرض الاشتراكات"
     }
   }
 }

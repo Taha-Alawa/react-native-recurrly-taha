@@ -22,6 +22,7 @@ const Subscriptions = () => {
     expandedId,
     fetchSubscriptions,
     handleToggleExpand,
+    handleEditPress,
     handleCancelPress,
     handleConfirmCancel,
     isMenuOpen,
@@ -52,6 +53,7 @@ const Subscriptions = () => {
             variant="manage"
             expanded={expandedId === item.id}
             onPress={() => handleToggleExpand(item)}
+            onEditPress={() => handleEditPress(item)}
             onCancelPress={() => handleCancelPress(item)}
           />
         )}
