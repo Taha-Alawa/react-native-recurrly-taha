@@ -21,6 +21,20 @@ export const formatCurrency = (value: number, currency = "USD"): string => {
   }
 };
 
+/** Money without the cents, for tight spots: chart axes, tiles, list rows. */
+export const formatCurrencyShort = (value: number, currency = "USD"): string => {
+  try {
+    return new Intl.NumberFormat(numberFormatLocale(), {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  } catch {
+    return String(Math.round(value));
+  }
+};
+
 export const formatDate = (value?: string): string => {
   if (!value) return i18n.t("common.notProvided", "Not provided");
   const parsed = dayjs(value);

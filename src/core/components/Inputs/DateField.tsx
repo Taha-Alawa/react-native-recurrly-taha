@@ -38,7 +38,7 @@ const DateField = ({
 }: DateFieldProps) => {
   const { t } = useTranslation();
   const direction = useDirection();
-  const weekdayLabels = t("insights.weekdays", {
+  const weekdayLabels = t("common.weekdays", {
     returnObjects: true,
   }) as string[];
 

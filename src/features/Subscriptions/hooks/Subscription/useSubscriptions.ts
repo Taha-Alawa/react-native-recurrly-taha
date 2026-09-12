@@ -162,7 +162,7 @@ export const useSubscriptions = () => {
       },
       {
         key: "go-to-insights",
-        label: t("subscriptions.menu.goToInsights", "View insights"),
+        label: t("subscriptions.menu.goToInsights", "View dashboard"),
         onPress: () => router.push("/insights"),
       },
     ],

@@ -147,7 +147,7 @@ export const useTransactions = () => {
       },
       {
         key: "go-to-insights",
-        label: t("transactions.menu.goToInsights", "View insights"),
+        label: t("transactions.menu.goToInsights", "View dashboard"),
         onPress: () => router.push("/insights"),
       },
     ],

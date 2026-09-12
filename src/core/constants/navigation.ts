@@ -19,6 +19,6 @@ export const TABS: AppTab[] = [
     glyph: "swap-vertical",
   },
   { name: "subscriptions", titleKey: "tabs.subscriptions", icon: icons.wallet },
-  { name: "insights", titleKey: "tabs.insights", icon: icons.activity },
+  { name: "insights", titleKey: "tabs.dashboard", icon: icons.activity },
   { name: "settings", titleKey: "tabs.settings", icon: icons.setting },
 ];

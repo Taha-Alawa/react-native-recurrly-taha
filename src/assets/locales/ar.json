@@ -26,7 +26,16 @@
       "error": "حدث خطأ ما"
     },
     "today": "اليوم",
-    "yesterday": "أمس"
+    "yesterday": "أمس",
+    "weekdays": [
+      "اثنين",
+      "ثلاثاء",
+      "أربعاء",
+      "خميس",
+      "جمعة",
+      "سبت",
+      "أحد"
+    ]
   },
   "categories": {
     "Entertainment": "ترفيه",
@@ -41,9 +50,9 @@
   "tabs": {
     "home": "الرئيسية",
     "subscriptions": "الاشتراكات",
-    "insights": "التحليلات",
     "settings": "الإعدادات",
-    "transactions": "المعاملات"
+    "transactions": "المعاملات",
+    "dashboard": "لوحة المعلومات"
   },
   "auth": {
     "wordmarkSub": "فوترة ذكية",
@@ -146,35 +155,10 @@
       "addSubscription": "إضافة اشتراك",
       "hideCancelled": "إخفاء الملغاة",
       "showCancelled": "إظهار الملغاة",
-      "goToInsights": "عرض التحليلات"
+      "goToInsights": "عرض لوحة المعلومات"
     },
     "cancelSuccess": "تم إلغاء الاشتراك.",
     "cancelConfirm": "إلغاء {{name}}؟ لا يمكن التراجع عن هذا."
-  },
-  "insights": {
-    "title": "تحليلات شهرية",
-    "upcoming": "القادمة",
-    "expenses": "المصروفات",
-    "history": "السجل",
-    "noHistory": "لا يوجد سجل اشتراكات بعد.",
-    "noHistoryInRange": "لا توجد اشتراكات ضمن النطاق الزمني المحدد.",
-    "perYear": "سنويًا",
-    "perMonth": "شهريًا",
-    "weekdays": [
-      "اثنين",
-      "ثلاثاء",
-      "أربعاء",
-      "خميس",
-      "جمعة",
-      "سبت",
-      "أحد"
-    ],
-    "menu": {
-      "title": "خيارات التحليلات",
-      "filterHistory": "تصفية السجل حسب التاريخ",
-      "clearFilter": "مسح تصفية التاريخ",
-      "goToSubscriptions": "عرض الاشتراكات"
-    }
   },
   "settings": {
     "signOut": "تسجيل الخروج",
@@ -328,7 +312,7 @@
       "addIncome": "إضافة دخل",
       "addOutcome": "إضافة مصروف",
       "thisWeek": "الانتقال إلى هذا الأسبوع",
-      "goToInsights": "عرض الإحصائيات"
+      "goToInsights": "عرض لوحة المعلومات"
     }
   },
   "transactionNames": {
@@ -344,5 +328,63 @@
     "Bills": "فواتير",
     "Health": "صحة",
     "Other": "أخرى"
+  },
+  "dashboard": {
+    "title": "لوحة المعلومات",
+    "year": "سنة",
+    "month": "شهر",
+    "thisYear": "هذه السنة",
+    "thisMonth": "هذا الشهر",
+    "previousPeriod": "الفترة السابقة",
+    "nextPeriod": "الفترة التالية",
+    "income": "الدخل",
+    "outcome": "المصروفات",
+    "subscriptions": "الاشتراكات",
+    "ofOutcome": "من المصروفات",
+    "saved": "المُدخر",
+    "overspent": "تجاوز الإنفاق",
+    "cashflow": "الدخل مقابل المصروفات",
+    "bucketAccessibility": "{{period}}: {{income}} دخل، {{outcome}} مصروف",
+    "rates": "المعدلات والحدود",
+    "savingsRate": "نسبة الادخار",
+    "ofIncomeKept": "من الدخل محتفظ به",
+    "noIncome": "لا يوجد دخل مسجل",
+    "avgIncome": "متوسط الدخل",
+    "avgOutcome": "متوسط المصروفات",
+    "perMonth": "شهريًا",
+    "perWeek": "أسبوعيًا",
+    "bestPeriod": "الأفضل",
+    "worstPeriod": "الأسوأ",
+    "topSpending": "أعلى المصروفات",
+    "noSpending": "لا توجد مصروفات مسجلة في هذه الفترة.",
+    "spendingCaption_one": "{{share}}% من المصروفات · معاملة واحدة",
+    "spendingCaption_two": "{{share}}% من المصروفات · معاملتان",
+    "spendingCaption_few": "{{share}}% من المصروفات · {{count}} معاملات",
+    "spendingCaption_many": "{{share}}% من المصروفات · {{count}} معاملة",
+    "spendingCaption_other": "{{share}}% من المصروفات · {{count}} معاملة",
+    "commitment": "التزام الاشتراكات",
+    "annualCommitment": "الالتزام السنوي",
+    "monthlyCommitment": "الالتزام الشهري",
+    "activeCount_one": "اشتراك نشط واحد",
+    "activeCount_two": "اشتراكان نشطان",
+    "activeCount_few": "{{count}} اشتراكات نشطة",
+    "activeCount_many": "{{count}} اشتراكًا نشطًا",
+    "activeCount_other": "{{count}} اشتراك نشط",
+    "paidSoFar": "المدفوع في هذه الفترة",
+    "stillToCome": "المتبقي",
+    "projectionNote": "لا توجد مدفوعات اشتراكات مسجلة هنا — هذا ما ستكلفه الأسعار الحالية، وليس مبالغ تم دفعها فعليًا.",
+    "byCost": "الاشتراكات حسب التكلفة السنوية",
+    "noSubscriptions": "لا توجد اشتراكات نشطة.",
+    "subscriptionCaption": "{{monthly}}/شهر · {{share}}% من اشتراكاتك",
+    "byCategory": "حسب الفئة",
+    "menu": {
+      "title": "خيارات لوحة المعلومات",
+      "showMonth": "التبديل إلى عرض الشهر",
+      "showYear": "التبديل إلى عرض السنة",
+      "thisYear": "الانتقال إلى هذه السنة",
+      "thisMonth": "الانتقال إلى هذا الشهر",
+      "goToTransactions": "عرض المعاملات",
+      "goToSubscriptions": "عرض الاشتراكات"
+    }
   }
 }

@@ -597,90 +597,6 @@
         @apply text-sm font-sans-bold text-accent;
     }
 
-    .insights-chart-card {
-        @apply mb-5 rounded-3xl bg-muted p-5;
-    }
-
-    .insights-chart-row {
-        @apply flex-row items-end justify-between gap-2;
-    }
-
-    .insights-bar-col {
-        @apply min-w-0 flex-1 items-center;
-    }
-
-    .insights-bar-badge {
-        @apply mb-2 max-w-full rounded-full bg-background px-2 py-1;
-    }
-
-    .insights-bar-badge-text {
-        @apply text-xs font-sans-bold text-primary;
-    }
-
-    .insights-bar-track {
-        @apply h-28 w-3 justify-end overflow-hidden rounded-full bg-background/70;
-    }
-
-    .insights-bar-fill {
-        @apply w-full rounded-full;
-    }
-
-    .insights-bar-label {
-        @apply mt-2 text-xs font-sans-semibold text-muted-foreground;
-    }
-
-    .insights-expenses-card {
-        @apply mb-5 flex-row items-center justify-between rounded-3xl border border-border bg-card p-5;
-    }
-
-    .insights-expenses-title {
-        @apply text-base font-sans-bold text-primary;
-    }
-
-    .insights-expenses-meta {
-        @apply mt-1 text-sm font-sans-medium text-muted-foreground;
-    }
-
-    .insights-expenses-amount {
-        @apply text-xl font-sans-extrabold text-primary;
-    }
-
-    .insights-history-item {
-        @apply flex-row items-center rounded-2xl border border-border bg-card p-4;
-    }
-
-    .insights-history-icon-wrap {
-        @apply size-12 items-center justify-center rounded-full;
-    }
-
-    .insights-history-icon {
-        @apply size-7;
-    }
-
-    .insights-history-copy {
-        @apply ml-3 min-w-0 flex-1;
-    }
-
-    .insights-history-name {
-        @apply text-base font-sans-bold text-primary;
-    }
-
-    .insights-history-date {
-        @apply mt-1 text-xs font-sans-semibold text-muted-foreground;
-    }
-
-    .insights-history-price-box {
-        @apply ml-3 shrink-0 items-end;
-    }
-
-    .insights-history-price {
-        @apply text-base font-sans-bold text-primary;
-    }
-
-    .insights-history-period {
-        @apply mt-1 text-xs font-sans-medium text-muted-foreground;
-    }
-
     .settings-section {
         @apply mt-8 gap-3;
     }
@@ -1059,5 +975,259 @@
 
     .upcoming-pay-text {
         @apply text-sm font-sans-bold text-background;
+    }
+
+    /* ------------------------------------------------------------ dashboard */
+
+    .period-nav {
+        @apply mb-4 gap-3;
+    }
+
+    .period-nav-row {
+        @apply flex-row items-center justify-between gap-3 rounded-2xl border border-border bg-card px-3 py-2;
+    }
+
+    .period-nav-button {
+        @apply size-9 shrink-0 items-center justify-center rounded-full bg-muted;
+    }
+
+    .period-nav-button-disabled {
+        @apply opacity-40;
+    }
+
+    .period-nav-button-text {
+        @apply text-base font-sans-bold text-primary;
+    }
+
+    .period-nav-copy {
+        @apply min-w-0 flex-1 items-center;
+    }
+
+    .period-nav-label {
+        @apply text-base font-sans-bold text-primary;
+    }
+
+    .period-nav-current {
+        @apply mt-0.5 text-xs font-sans-semibold text-muted-foreground;
+    }
+
+    .summary-grid {
+        @apply gap-3;
+    }
+
+    .summary-row {
+        @apply flex-row gap-3;
+    }
+
+    .summary-tile {
+        @apply min-w-0 flex-1 gap-1 rounded-2xl border border-border bg-card px-4 py-3;
+    }
+
+    .summary-label {
+        @apply text-xs font-sans-semibold uppercase tracking-[0.5px] text-muted-foreground;
+    }
+
+    .summary-value {
+        @apply text-xl font-sans-extrabold;
+    }
+
+    .summary-value-neutral {
+        @apply text-primary;
+    }
+
+    .summary-value-good {
+        @apply text-success;
+    }
+
+    .summary-value-bad {
+        @apply text-destructive;
+    }
+
+    .summary-caption {
+        @apply text-[10px] font-sans-medium text-muted-foreground;
+    }
+
+    .chart-card {
+        @apply gap-3 rounded-3xl border border-border bg-card p-5;
+    }
+
+    .chart-head {
+        @apply flex-row items-center justify-between gap-3;
+    }
+
+    .chart-head-title {
+        @apply min-w-0 flex-1 text-sm font-sans-bold text-primary;
+    }
+
+    .chart-head-figures {
+        @apply shrink-0 items-end;
+    }
+
+    .chart-head-figure {
+        @apply text-xs font-sans-bold text-primary;
+    }
+
+    .chart-scale-row {
+        @apply flex-row items-center gap-2;
+    }
+
+    .chart-scale-label {
+        @apply shrink-0 text-[10px] font-sans-semibold text-muted-foreground;
+    }
+
+    .chart-scale-rule {
+        @apply h-px flex-1 bg-border;
+    }
+
+    .chart-columns {
+        @apply flex-row items-end gap-0.5;
+    }
+
+    .chart-col {
+        @apply min-w-0 flex-1 justify-end self-stretch rounded-md px-0.5 pb-0;
+    }
+
+    .chart-col-active {
+        @apply bg-muted;
+    }
+
+    .chart-bars {
+        @apply flex-row items-end justify-center gap-0.5;
+    }
+
+    .chart-bar {
+        @apply w-1.5 rounded-t;
+    }
+
+    .chart-labels {
+        @apply flex-row gap-0.5;
+    }
+
+    .chart-label-cell {
+        @apply min-w-0 flex-1 items-center;
+    }
+
+    .chart-label {
+        @apply text-[10px] font-sans-semibold text-muted-foreground;
+    }
+
+    .chart-label-active {
+        @apply text-primary;
+    }
+
+    .chart-legend {
+        @apply flex-row flex-wrap gap-4;
+    }
+
+    .chart-legend-item {
+        @apply flex-row items-center gap-2;
+    }
+
+    .chart-legend-swatch {
+        @apply size-2.5 rounded-sm;
+    }
+
+    .chart-legend-text {
+        @apply text-xs font-sans-semibold text-muted-foreground;
+    }
+
+    .stat-card {
+        @apply gap-4 rounded-3xl border border-border bg-card p-5;
+    }
+
+    .stat-hero {
+        @apply flex-row items-center justify-between gap-3;
+    }
+
+    .stat-hero-label {
+        @apply text-sm font-sans-bold text-primary;
+    }
+
+    .stat-hero-caption {
+        @apply mt-1 text-xs font-sans-medium text-muted-foreground;
+    }
+
+    .stat-hero-value {
+        @apply shrink-0 text-2xl font-sans-extrabold text-primary;
+    }
+
+    .stat-rows {
+        @apply gap-3;
+    }
+
+    .stat-row {
+        @apply flex-row items-center justify-between gap-3;
+    }
+
+    .stat-row-label {
+        @apply shrink-0 text-sm font-sans-medium text-muted-foreground;
+    }
+
+    .stat-row-value {
+        @apply min-w-0 flex-1 text-right text-sm font-sans-bold text-primary;
+    }
+
+    .stat-note {
+        @apply text-xs font-sans-medium leading-5 text-muted-foreground;
+    }
+
+    .commitment-track {
+        @apply h-2 overflow-hidden rounded-full bg-muted;
+    }
+
+    .commitment-fill {
+        @apply h-full rounded-full;
+    }
+
+    .breakdown-list {
+        @apply gap-4;
+    }
+
+    .breakdown-row {
+        @apply gap-2;
+    }
+
+    .breakdown-head {
+        @apply flex-row items-center justify-between gap-3;
+    }
+
+    .breakdown-identity {
+        @apply min-w-0 flex-1 flex-row items-center gap-2;
+    }
+
+    .breakdown-icon {
+        @apply size-5 shrink-0;
+    }
+
+    .breakdown-name {
+        @apply min-w-0 flex-1 text-sm font-sans-bold text-primary;
+    }
+
+    .breakdown-value {
+        @apply shrink-0 text-sm font-sans-bold text-primary;
+    }
+
+    .breakdown-track {
+        @apply h-2 overflow-hidden rounded-full bg-muted;
+    }
+
+    .breakdown-fill {
+        @apply h-full rounded-full;
+    }
+
+    .breakdown-caption {
+        @apply text-[10px] font-sans-medium text-muted-foreground;
+    }
+
+    .category-row {
+        @apply flex-row items-center gap-3;
+    }
+
+    .category-copy {
+        @apply min-w-0 flex-1 gap-2;
+    }
+
+    .category-figures {
+        @apply shrink-0 items-end;
     }
 }

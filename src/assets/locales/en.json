@@ -23,7 +23,16 @@
       "error": "Something went wrong"
     },
     "today": "Today",
-    "yesterday": "Yesterday"
+    "yesterday": "Yesterday",
+    "weekdays": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+    ]
   },
   "categories": {
     "Entertainment": "Entertainment",
@@ -38,9 +47,9 @@
   "tabs": {
     "home": "Home",
     "subscriptions": "Subscriptions",
-    "insights": "Insights",
     "settings": "Settings",
-    "transactions": "Transactions"
+    "transactions": "Transactions",
+    "dashboard": "Dashboard"
   },
   "auth": {
     "wordmarkSub": "Smart Billing",
@@ -137,35 +146,10 @@
       "addSubscription": "Add subscription",
       "hideCancelled": "Hide cancelled",
       "showCancelled": "Show cancelled",
-      "goToInsights": "View insights"
+      "goToInsights": "View dashboard"
     },
     "cancelSuccess": "Subscription cancelled.",
     "cancelConfirm": "Cancel {{name}}? This cannot be undone."
-  },
-  "insights": {
-    "title": "Monthly Insights",
-    "upcoming": "Upcoming",
-    "expenses": "Expenses",
-    "history": "History",
-    "noHistory": "No subscription history yet.",
-    "noHistoryInRange": "No subscriptions in the selected date range.",
-    "perYear": "per year",
-    "perMonth": "per month",
-    "weekdays": [
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat",
-      "Sun"
-    ],
-    "menu": {
-      "title": "Insights options",
-      "filterHistory": "Filter history by date",
-      "clearFilter": "Clear date filter",
-      "goToSubscriptions": "View subscriptions"
-    }
   },
   "settings": {
     "signOut": "Sign out",
@@ -316,7 +300,7 @@
       "addIncome": "Add income",
       "addOutcome": "Add expense",
       "thisWeek": "Jump to this week",
-      "goToInsights": "View insights"
+      "goToInsights": "View dashboard"
     }
   },
   "transactionNames": {
@@ -332,5 +316,57 @@
     "Bills": "Bills",
     "Health": "Health",
     "Other": "Other"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "year": "Year",
+    "month": "Month",
+    "thisYear": "This year",
+    "thisMonth": "This month",
+    "previousPeriod": "Previous period",
+    "nextPeriod": "Next period",
+    "income": "Income",
+    "outcome": "Outcome",
+    "subscriptions": "Subscriptions",
+    "ofOutcome": "of outcome",
+    "saved": "Saved",
+    "overspent": "Overspent",
+    "cashflow": "Income vs Outcome",
+    "bucketAccessibility": "{{period}}: {{income}} in, {{outcome}} out",
+    "rates": "Rates & extremes",
+    "savingsRate": "Savings rate",
+    "ofIncomeKept": "of income kept",
+    "noIncome": "No income recorded",
+    "avgIncome": "Average income",
+    "avgOutcome": "Average outcome",
+    "perMonth": "per month",
+    "perWeek": "per week",
+    "bestPeriod": "Best",
+    "worstPeriod": "Worst",
+    "topSpending": "Top spending",
+    "noSpending": "No spending recorded in this period.",
+    "spendingCaption_one": "{{share}}% of outcome · {{count}} transaction",
+    "spendingCaption_other": "{{share}}% of outcome · {{count}} transactions",
+    "commitment": "Subscription commitment",
+    "annualCommitment": "Annual commitment",
+    "monthlyCommitment": "Monthly commitment",
+    "activeCount_one": "{{count}} active subscription",
+    "activeCount_other": "{{count}} active subscriptions",
+    "paidSoFar": "Paid in this period",
+    "stillToCome": "Still to come",
+    "projectionNote": "No subscription payments recorded here — this is what today's prices would cost, not money that moved.",
+    "byCost": "Subscriptions by yearly cost",
+    "noSubscriptions": "No active subscriptions.",
+    "subscriptionCaption": "{{monthly}}/mo · {{share}}% of your subscriptions",
+    "byCategory": "By category",
+    "menu": {
+      "title": "Dashboard options",
+      "showMonth": "Switch to month view",
+      "showYear": "Switch to year view",
+      "thisYear": "Jump to this year",
+      "thisMonth": "Jump to this month",
+      "goToTransactions": "View transactions",
+      "goToSubscriptions": "View subscriptions"
+    }
   }
 }
