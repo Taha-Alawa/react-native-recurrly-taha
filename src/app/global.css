@@ -850,4 +850,214 @@
     .loader-inline {
         @apply items-center py-4;
     }
+
+    /* ---------------------------------------------------------- transactions */
+
+    .tx-week-nav {
+        @apply flex-row items-center justify-between gap-3 rounded-2xl border border-border bg-card px-3 py-2;
+    }
+
+    .tx-week-button {
+        @apply size-9 shrink-0 items-center justify-center rounded-full bg-muted;
+    }
+
+    .tx-week-button-disabled {
+        @apply opacity-40;
+    }
+
+    .tx-week-button-text {
+        @apply text-base font-sans-bold text-primary;
+    }
+
+    .tx-week-copy {
+        @apply min-w-0 flex-1 items-center;
+    }
+
+    .tx-week-range {
+        @apply text-sm font-sans-bold text-primary;
+    }
+
+    .tx-week-label {
+        @apply mt-0.5 text-xs font-sans-semibold text-muted-foreground;
+    }
+
+    .tx-totals-card {
+        @apply my-4 gap-4 rounded-3xl border border-border bg-card p-5;
+    }
+
+    .tx-totals-head {
+        @apply flex-row items-center justify-between gap-3;
+    }
+
+    .tx-totals-title {
+        @apply min-w-0 flex-1 text-base font-sans-bold text-primary;
+    }
+
+    .tx-totals-net {
+        @apply shrink-0 text-xl font-sans-extrabold;
+    }
+
+    .tx-totals-row {
+        @apply flex-row gap-3;
+    }
+
+    .tx-total-tile {
+        @apply min-w-0 flex-1 gap-1 rounded-2xl bg-background px-3 py-3;
+    }
+
+    .tx-total-label {
+        @apply text-xs font-sans-semibold uppercase tracking-[0.5px] text-muted-foreground;
+    }
+
+    .tx-total-value {
+        @apply text-base font-sans-extrabold;
+    }
+
+    .tx-total-value-income {
+        @apply text-success;
+    }
+
+    .tx-total-value-outcome {
+        @apply text-destructive;
+    }
+
+    .tx-total-value-neutral {
+        @apply text-primary;
+    }
+
+    .tx-total-caption {
+        @apply text-[10px] font-sans-medium text-muted-foreground;
+    }
+
+    .tx-actions-row {
+        @apply mb-1 flex-row gap-3;
+    }
+
+    .tx-action {
+        @apply min-w-0 flex-1 items-center rounded-2xl border py-3;
+    }
+
+    .tx-action-income {
+        @apply border-success/40 bg-success/10;
+    }
+
+    .tx-action-outcome {
+        @apply border-destructive/30 bg-destructive/10;
+    }
+
+    .tx-action-text {
+        @apply text-sm font-sans-bold;
+    }
+
+    .tx-action-text-income {
+        @apply text-success;
+    }
+
+    .tx-action-text-outcome {
+        @apply text-destructive;
+    }
+
+    .tx-item {
+        @apply flex-row items-center rounded-2xl border border-border bg-card p-4;
+    }
+
+    .tx-item-badge {
+        @apply size-12 shrink-0 items-center justify-center rounded-full;
+    }
+
+    .tx-item-badge-income {
+        @apply bg-success/15;
+    }
+
+    .tx-item-badge-outcome {
+        @apply bg-destructive/10;
+    }
+
+    .tx-item-icon {
+        @apply size-7;
+    }
+
+    .tx-item-glyph {
+        @apply text-lg font-sans-extrabold;
+    }
+
+    .tx-item-glyph-income {
+        @apply text-success;
+    }
+
+    .tx-item-glyph-outcome {
+        @apply text-destructive;
+    }
+
+    .tx-item-copy {
+        @apply ml-3 min-w-0 flex-1;
+    }
+
+    .tx-item-name {
+        @apply text-base font-sans-bold text-primary;
+    }
+
+    .tx-item-meta {
+        @apply mt-1 text-xs font-sans-semibold text-muted-foreground;
+    }
+
+    .tx-item-amount-box {
+        @apply ml-3 shrink-0 items-end;
+    }
+
+    .tx-item-amount {
+        @apply text-base font-sans-bold;
+    }
+
+    .tx-item-amount-income {
+        @apply text-success;
+    }
+
+    .tx-item-amount-outcome {
+        @apply text-primary;
+    }
+
+    .tx-item-tag {
+        @apply mt-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-sans-semibold text-muted-foreground;
+    }
+
+    .tx-suggestions {
+        @apply -mt-2 mb-5;
+    }
+
+    .date-field-trigger {
+        @apply flex-row items-center justify-between gap-3 rounded-2xl border border-border bg-card px-4 py-4;
+    }
+
+    .date-field-value {
+        @apply min-w-0 flex-1 text-base font-sans-semibold text-primary;
+    }
+
+    .date-field-chevron {
+        @apply shrink-0 text-xs font-sans-bold text-muted-foreground;
+    }
+
+    .date-field-panel {
+        @apply mt-3 rounded-2xl border border-border bg-card p-3;
+    }
+
+    .date-field-quick-row {
+        @apply mb-3 flex-row gap-2;
+    }
+
+    .upcoming-card-overdue {
+        @apply border-destructive/40;
+    }
+
+    .upcoming-meta-overdue {
+        @apply text-destructive;
+    }
+
+    .upcoming-pay {
+        @apply mt-3 items-center rounded-full bg-primary py-2;
+    }
+
+    .upcoming-pay-text {
+        @apply text-sm font-sans-bold text-background;
+    }
 }

@@ -21,7 +21,9 @@
       "info": "Notice",
       "warn": "Warning",
       "error": "Something went wrong"
-    }
+    },
+    "today": "Today",
+    "yesterday": "Yesterday"
   },
   "categories": {
     "Entertainment": "Entertainment",
@@ -37,7 +39,8 @@
     "home": "Home",
     "subscriptions": "Subscriptions",
     "insights": "Insights",
-    "settings": "Settings"
+    "settings": "Settings",
+    "transactions": "Transactions"
   },
   "auth": {
     "wordmarkSub": "Smart Billing",
@@ -110,7 +113,12 @@
     "daysLeft_other": "{{count}} days left",
     "lastDay": "Last day",
     "editBalance": "Edit total balance",
-    "noRenewals": "No upcoming renewals"
+    "noRenewals": "No upcoming renewals",
+    "pay": "Pay",
+    "payAccessibility": "Pay {{name}}",
+    "viewTransactions": "Transactions",
+    "overdueDays_one": "{{count}} day overdue",
+    "overdueDays_other": "{{count}} days overdue"
   },
   "subscriptions": {
     "title": "My Subscriptions",
@@ -197,13 +205,14 @@
     "updateBalance": {
       "title": "Update Balance",
       "currentLabel": "Current balance",
-      "amountLabel": "New balance",
+      "amountLabel": "Starting balance",
       "amountPlaceholder": "e.g. 2489.48",
       "submit": "Save Balance",
       "errors": {
         "amountInvalid": "Enter a valid amount of 0 or more."
       },
-      "success": "Balance updated."
+      "success": "Balance updated.",
+      "breakdown": "{{starting}} starting {{movement}} from transactions"
     },
     "dateRange": {
       "title": "Select Date Range",
@@ -232,6 +241,29 @@
         "nameRequired": "Enter a username.",
         "nameTooShort": "Username must be at least 2 characters."
       }
+    },
+    "createTransaction": {
+      "incomeTitle": "New Income",
+      "outcomeTitle": "New Expense",
+      "typeLabel": "Type",
+      "nameLabel": "Transaction",
+      "namePlaceholder": "e.g. Supermarket",
+      "sourceLabel": "Source",
+      "sourcePlaceholder": "e.g. Salary",
+      "amountLabel": "Amount",
+      "amountPlaceholder": "e.g. 24.90",
+      "dateLabel": "Date",
+      "datePlaceholder": "Pick a date",
+      "submitIncome": "Add Income",
+      "submitOutcome": "Add Expense",
+      "submitting": "Saving…",
+      "incomeSuccess": "Income added.",
+      "outcomeSuccess": "Expense added.",
+      "errors": {
+        "nameRequired": "Enter what this was for.",
+        "amountInvalid": "Enter a valid amount greater than 0.",
+        "dateRequired": "Pick a date."
+      }
     }
   },
   "subscriptionDetail": {
@@ -252,5 +284,56 @@
       "not-configured": "Firebase isn't configured. Add the EXPO_PUBLIC_FIREBASE_* values to .env and restart.",
       "no-session": "You're signed out. Sign in again to continue."
     }
+  },
+  "transactions": {
+    "title": "Transactions",
+    "listTitle": "Activity",
+    "income": "Income",
+    "outcome": "Expense",
+    "addIncome": "+ Income",
+    "addOutcome": "- Expense",
+    "weekSummary": "This range",
+    "totalIncome": "Income",
+    "totalOutcome": "Outcome",
+    "totalSubscriptions": "Subs",
+    "ofOutcome": "of outcome",
+    "thisWeek": "This week",
+    "weeksAgo_one": "{{count}} week ago",
+    "weeksAgo_other": "{{count}} weeks ago",
+    "previousWeek": "Previous week",
+    "nextWeek": "Next week",
+    "subscriptionTag": "Subscription",
+    "rowAccessibility": "{{name}}. Hold to delete.",
+    "empty": "Nothing recorded this week yet.",
+    "emptyPast": "Nothing recorded in this week.",
+    "delete": "Delete",
+    "deleteTitle": "Delete Transaction",
+    "deleteConfirm": "Delete {{name}}? Your balance will be recalculated without it.",
+    "deleteSuccess": "Transaction deleted.",
+    "payTitle": "Record Payment",
+    "payConfirm": "Pay {{amount}} for {{name}}? It comes off your balance and the next renewal moves to {{date}}.",
+    "payConfirmLabel": "Pay now",
+    "paySuccess": "{{name}} paid. Next renewal {{date}}.",
+    "menu": {
+      "title": "Transaction options",
+      "addIncome": "Add income",
+      "addOutcome": "Add expense",
+      "thisWeek": "Jump to this week",
+      "goToInsights": "View insights"
+    }
+  },
+  "transactionNames": {
+    "Salary": "Salary",
+    "Freelance": "Freelance",
+    "Refund": "Refund",
+    "Gift": "Gift",
+    "Investment": "Investment",
+    "Supermarket": "Supermarket",
+    "Restaurant": "Restaurant",
+    "Online Shopping": "Online Shopping",
+    "Transport": "Transport",
+    "Bills": "Bills",
+    "Health": "Health",
+    "Other": "Other"
   }
 }

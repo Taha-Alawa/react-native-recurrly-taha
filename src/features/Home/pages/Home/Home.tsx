@@ -13,6 +13,7 @@ import BalanceDialog from "@/features/Balance/components/Balance/BalanceDialog";
 import SubscriptionCard from "@/features/Subscriptions/components/Subscription/SubscriptionCard";
 import SubscriptionDialog from "@/features/Subscriptions/components/Subscription/SubscriptionDialog";
 import UpcomingSubscriptionCard from "@/features/Subscriptions/components/Upcoming/UpcomingSubscriptionCard";
+import PaySubscriptionDialog from "@/features/Transactions/components/Payment/PaySubscriptionDialog";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
@@ -32,6 +33,12 @@ const Home = () => {
     onCreatePress,
     refreshSubscriptions,
     onViewAllSubscriptions,
+    onViewTransactions,
+    onPayPress,
+    isPayDialogOpen,
+    payPayload,
+    onConfirmPay,
+    closePayDialog,
   } = useHome();
 
   return (
@@ -64,12 +71,19 @@ const Home = () => {
             />
 
             <View>
-              <ListHeading title={t("home.upcoming", "Upcoming")} showAction={false} />
+              <ListHeading
+                title={t("home.upcoming", "Upcoming")}
+                actionLabel={t("home.viewTransactions", "Transactions")}
+                onActionPress={onViewTransactions}
+              />
               <FlatList
                 data={upcomingSubscriptions}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                  <UpcomingSubscriptionCard subscription={item} />
+                  <UpcomingSubscriptionCard
+                    subscription={item}
+                    onPay={onPayPress}
+                  />
                 )}
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -104,6 +118,12 @@ const Home = () => {
 
       <SubscriptionDialog onRefresh={refreshSubscriptions} />
       <BalanceDialog onRefresh={refreshBalance} />
+      <PaySubscriptionDialog
+        visible={isPayDialogOpen}
+        payload={payPayload}
+        onConfirm={onConfirmPay}
+        onClose={closePayDialog}
+      />
     </SafeAreaView>
   );
 };

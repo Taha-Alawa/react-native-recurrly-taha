@@ -1,11 +1,18 @@
 import dayjs from "dayjs";
 import i18n from "@/core/i18n";
 import type {
+  BillingCycle,
   Subscription,
   UpcomingSubscription,
 } from "@/features/Subscriptions/interfaces/Subscription.interface";
 
 /** Domain-specific formatting — anything that knows what a Subscription is. */
+
+/**
+ * How close a renewal has to be before it can be paid from the Upcoming rail.
+ * Anything already due or overdue is payable regardless.
+ */
+export const PAYABLE_WITHIN_DAYS = 3;
 
 export const formatStatusLabel = (value?: string): string => {
   if (!value) return i18n.t("common.unknown", "Unknown");
@@ -37,6 +44,28 @@ export const formatRenewalCycle = (renewalDate?: string): string => {
 export const isYearly = (subscription: Pick<Subscription, "billing" | "frequency">) =>
   subscription.billing === "Yearly" || subscription.frequency === "Yearly";
 
+export const getBillingCycle = (
+  subscription: Pick<Subscription, "billing" | "frequency">,
+): BillingCycle => (isYearly(subscription) ? "Yearly" : "Monthly");
+
+/**
+ * The renewal date one cycle on from the current one.
+ *
+ * Counted from the existing renewal date rather than from today, so a
+ * subscription paid late keeps its original billing day instead of drifting
+ * forward by however long the user took to pay it. A payment covers exactly one
+ * cycle: a subscription several cycles overdue stays payable until it is caught
+ * up, which is the truth of the matter.
+ */
+export const advanceRenewalDate = (subscription: Subscription): string => {
+  const current = dayjs(subscription.renewalDate);
+  const base = current.isValid() ? current : dayjs();
+
+  return base
+    .add(1, isYearly(subscription) ? "year" : "month")
+    .toISOString();
+};
+
 /** The soonest future renewal across all active subscriptions, if any. */
 export const getNextRenewalDate = (
   subscriptions: Subscription[],
@@ -55,6 +84,10 @@ export const getNextRenewalDate = (
  * Upcoming renewals are a projection over the subscription list, not a separate
  * resource — deriving them keeps the rail truthful when a subscription is added
  * or cancelled.
+ *
+ * Overdue renewals are included rather than filtered out: a renewal the user
+ * has not paid is the one they most need to see, and hiding it would leave no
+ * way to record the payment. They sort first, with a negative `daysLeft`.
  */
 export const deriveUpcoming = (
   subscriptions: Subscription[],
@@ -71,7 +104,7 @@ export const deriveUpcoming = (
       if (!renewal.isValid()) return [];
 
       const daysLeft = renewal.diff(now, "day");
-      if (daysLeft < 0 || daysLeft > withinDays) return [];
+      if (daysLeft > withinDays) return [];
 
       return [
         {
@@ -81,6 +114,8 @@ export const deriveUpcoming = (
           price: subscription.price,
           currency: subscription.currency,
           daysLeft,
+          isOverdue: daysLeft < 0,
+          isPayable: daysLeft <= PAYABLE_WITHIN_DAYS,
         },
       ];
     })

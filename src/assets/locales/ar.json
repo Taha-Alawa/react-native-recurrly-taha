@@ -24,7 +24,9 @@
       "info": "تنبيه",
       "warn": "تحذير",
       "error": "حدث خطأ ما"
-    }
+    },
+    "today": "اليوم",
+    "yesterday": "أمس"
   },
   "categories": {
     "Entertainment": "ترفيه",
@@ -40,7 +42,8 @@
     "home": "الرئيسية",
     "subscriptions": "الاشتراكات",
     "insights": "التحليلات",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "transactions": "المعاملات"
   },
   "auth": {
     "wordmarkSub": "فوترة ذكية",
@@ -116,7 +119,15 @@
     "daysLeft_other": "{{count}} يوم متبقٍ",
     "lastDay": "اليوم الأخير",
     "editBalance": "تعديل الرصيد الإجمالي",
-    "noRenewals": "لا توجد تجديدات قادمة"
+    "noRenewals": "لا توجد تجديدات قادمة",
+    "pay": "ادفع",
+    "payAccessibility": "ادفع {{name}}",
+    "viewTransactions": "المعاملات",
+    "overdueDays_one": "متأخر يومًا واحدًا",
+    "overdueDays_two": "متأخر يومين",
+    "overdueDays_few": "متأخر {{count}} أيام",
+    "overdueDays_many": "متأخر {{count}} يومًا",
+    "overdueDays_other": "متأخر {{count}} يوم"
   },
   "subscriptions": {
     "title": "اشتراكاتي",
@@ -203,13 +214,14 @@
     "updateBalance": {
       "title": "تحديث الرصيد",
       "currentLabel": "الرصيد الحالي",
-      "amountLabel": "الرصيد الجديد",
+      "amountLabel": "الرصيد الابتدائي",
       "amountPlaceholder": "مثال: 2489.48",
       "submit": "حفظ الرصيد",
       "errors": {
         "amountInvalid": "أدخل مبلغًا صالحًا لا يقل عن 0."
       },
-      "success": "تم تحديث الرصيد."
+      "success": "تم تحديث الرصيد.",
+      "breakdown": "{{starting}} ابتدائي {{movement}} من المعاملات"
     },
     "dateRange": {
       "title": "اختر النطاق الزمني",
@@ -238,6 +250,29 @@
         "nameRequired": "أدخل اسم مستخدم.",
         "nameTooShort": "يجب ألا يقل اسم المستخدم عن حرفين."
       }
+    },
+    "createTransaction": {
+      "incomeTitle": "دخل جديد",
+      "outcomeTitle": "مصروف جديد",
+      "typeLabel": "النوع",
+      "nameLabel": "المعاملة",
+      "namePlaceholder": "مثال: سوبرماركت",
+      "sourceLabel": "المصدر",
+      "sourcePlaceholder": "مثال: راتب",
+      "amountLabel": "المبلغ",
+      "amountPlaceholder": "مثال: 24.90",
+      "dateLabel": "التاريخ",
+      "datePlaceholder": "اختر تاريخًا",
+      "submitIncome": "إضافة دخل",
+      "submitOutcome": "إضافة مصروف",
+      "submitting": "جارٍ الحفظ…",
+      "incomeSuccess": "تمت إضافة الدخل.",
+      "outcomeSuccess": "تمت إضافة المصروف.",
+      "errors": {
+        "nameRequired": "أدخل سبب المعاملة.",
+        "amountInvalid": "أدخل مبلغًا صحيحًا أكبر من 0.",
+        "dateRequired": "اختر تاريخًا."
+      }
     }
   },
   "subscriptionDetail": {
@@ -258,5 +293,59 @@
       "not-configured": "لم يتم إعداد Firebase. أضف قيم EXPO_PUBLIC_FIREBASE_* إلى ملف env. وأعد التشغيل.",
       "no-session": "تم تسجيل خروجك. سجّل الدخول مرة أخرى للمتابعة."
     }
+  },
+  "transactions": {
+    "title": "المعاملات",
+    "listTitle": "النشاط",
+    "income": "دخل",
+    "outcome": "مصروف",
+    "addIncome": "+ دخل",
+    "addOutcome": "- مصروف",
+    "weekSummary": "هذه الفترة",
+    "totalIncome": "الدخل",
+    "totalOutcome": "المصروفات",
+    "totalSubscriptions": "الاشتراكات",
+    "ofOutcome": "من المصروفات",
+    "thisWeek": "هذا الأسبوع",
+    "weeksAgo_one": "قبل أسبوع",
+    "weeksAgo_two": "قبل أسبوعين",
+    "weeksAgo_few": "قبل {{count}} أسابيع",
+    "weeksAgo_many": "قبل {{count}} أسبوعًا",
+    "weeksAgo_other": "قبل {{count}} أسبوع",
+    "previousWeek": "الأسبوع السابق",
+    "nextWeek": "الأسبوع التالي",
+    "subscriptionTag": "اشتراك",
+    "rowAccessibility": "{{name}}. اضغط مطولًا للحذف.",
+    "empty": "لا توجد معاملات هذا الأسبوع بعد.",
+    "emptyPast": "لا توجد معاملات في هذا الأسبوع.",
+    "delete": "حذف",
+    "deleteTitle": "حذف المعاملة",
+    "deleteConfirm": "حذف {{name}}؟ سيُعاد حساب رصيدك بدونها.",
+    "deleteSuccess": "تم حذف المعاملة.",
+    "payTitle": "تسجيل دفعة",
+    "payConfirm": "دفع {{amount}} لـ {{name}}؟ سيُخصم من رصيدك وينتقل التجديد القادم إلى {{date}}.",
+    "payConfirmLabel": "ادفع الآن",
+    "paySuccess": "تم دفع {{name}}. التجديد القادم {{date}}.",
+    "menu": {
+      "title": "خيارات المعاملات",
+      "addIncome": "إضافة دخل",
+      "addOutcome": "إضافة مصروف",
+      "thisWeek": "الانتقال إلى هذا الأسبوع",
+      "goToInsights": "عرض الإحصائيات"
+    }
+  },
+  "transactionNames": {
+    "Salary": "راتب",
+    "Freelance": "عمل حر",
+    "Refund": "استرداد",
+    "Gift": "هدية",
+    "Investment": "استثمار",
+    "Supermarket": "سوبرماركت",
+    "Restaurant": "مطعم",
+    "Online Shopping": "تسوق إلكتروني",
+    "Transport": "مواصلات",
+    "Bills": "فواتير",
+    "Health": "صحة",
+    "Other": "أخرى"
   }
 }

@@ -1,23 +1,27 @@
 import { Image, View } from "react-native";
 import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { colors, components } from "@/core/theme/tokens";
-import { TABS } from "@/core/constants/navigation";
+import { colors, components, spacing } from "@/core/theme/tokens";
+import { TABS, type AppTab } from "@/core/constants/navigation";
 
 const tabBar = components.tabBar;
 
-const TabIcon = ({
-  focused,
-  icon,
-}: {
-  focused: boolean;
-  icon: React.ComponentProps<typeof Image>["source"];
-}) => (
+const TabIcon = ({ focused, tab }: { focused: boolean; tab: AppTab }) => (
   <View className="tabs-icon">
     <View className={clsx("tabs-pill", focused && "tabs-active")}>
-      <Image source={icon} className="tabs-glyph" />
+      {tab.icon ? (
+        <Image source={tab.icon} className="tabs-glyph" />
+      ) : (
+        // Matches the bundled glyphs, which are light artwork on the dark bar.
+        <Ionicons
+          name={tab.glyph!}
+          size={spacing[6]}
+          color={colors.background}
+        />
+      )}
     </View>
   </View>
 );
@@ -58,9 +62,7 @@ const TabsLayout = () => {
           name={tab.name}
           options={{
             title: t(tab.titleKey),
-            tabBarIcon: ({ focused }) => (
-              <TabIcon focused={focused} icon={tab.icon} />
-            ),
+            tabBarIcon: ({ focused }) => <TabIcon focused={focused} tab={tab} />,
           }}
         />
       ))}

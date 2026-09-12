@@ -40,5 +40,9 @@ export interface UpcomingSubscription {
   name: string;
   price: number;
   currency?: string;
+  /** Negative once the renewal date has passed. */
   daysLeft: number;
+  isOverdue: boolean;
+  /** Due, overdue, or close enough that the rail offers a Pay button. */
+  isPayable: boolean;
 }

@@ -3,6 +3,10 @@ import { Pressable, Text, View } from "react-native";
 import clsx from "clsx";
 import dayjs, { type Dayjs } from "dayjs";
 import { useTranslation } from "react-i18next";
+import {
+  buildMonthGrid,
+  CALENDAR_CELL_WIDTH as CELL_WIDTH,
+} from "@/core/utils/calendar";
 import DialogShell from "@/core/components/Dialog/DialogShell";
 import SubmitButton from "@/core/components/Form/SubmitButton";
 import { useDirection } from "@/core/components/Localization/LocalizationProvider";
@@ -19,33 +23,6 @@ export type DateRangePickerProps = {
   onClose: () => void;
   onApply: (range: DateRange) => void;
   onClear?: () => void;
-};
-
-const DAYS_IN_WEEK = 7;
-const CELL_WIDTH = `${100 / DAYS_IN_WEEK}%`;
-
-/**
- * Month grid, Monday-first to match the weekday labels used across the app.
- * Leading/trailing blanks keep every row exactly seven cells wide.
- */
-const buildMonthGrid = (month: Dayjs): (Dayjs | null)[] => {
-  const startOfMonth = month.startOf("month");
-  const leadingBlanks = (startOfMonth.day() + 6) % DAYS_IN_WEEK;
-
-  const cells: (Dayjs | null)[] = Array.from(
-    { length: leadingBlanks },
-    () => null,
-  );
-
-  for (let day = 0; day < month.daysInMonth(); day += 1) {
-    cells.push(startOfMonth.add(day, "day"));
-  }
-
-  while (cells.length % DAYS_IN_WEEK !== 0) {
-    cells.push(null);
-  }
-
-  return cells;
 };
 
 const DateRangePicker = ({
