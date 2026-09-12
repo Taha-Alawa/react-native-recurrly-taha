@@ -814,11 +814,11 @@
     }
 
     .tx-totals-row {
-        @apply flex-row gap-3;
+        @apply flex-row gap-2;
     }
 
     .tx-total-tile {
-        @apply min-w-0 flex-1 gap-1 rounded-2xl bg-background px-3 py-3;
+        @apply min-w-0 flex-1 gap-1 rounded-2xl bg-background px-2 py-3;
     }
 
     .tx-total-label {
@@ -826,7 +826,7 @@
     }
 
     .tx-total-value {
-        @apply text-base font-sans-extrabold;
+        @apply text-lg font-sans-extrabold;
     }
 
     .tx-total-value-income {

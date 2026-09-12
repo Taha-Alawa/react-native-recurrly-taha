@@ -65,7 +65,7 @@ const Insights = () => {
         <SummaryTiles totals={totals} />
 
         <ListHeading
-          title={t("dashboard.cashflow", "Income vs Outcome")}
+          title={t("dashboard.cashflow", "Income vs Expenses")}
           showAction={false}
         />
 

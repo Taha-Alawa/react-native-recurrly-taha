@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
-import { formatCurrency } from "@/core/utils/formatters";
+import { formatCurrencyShort } from "@/core/utils/formatters";
 import type { TransactionTotals } from "@/features/Transactions/interfaces/Transaction.interface";
 
 export type TransactionTotalsCardProps = {
@@ -34,7 +34,7 @@ const TransactionTotalsCard = ({ totals }: TransactionTotalsCardProps) => {
           numberOfLines={1}
         >
           {isPositive ? "+" : "−"}
-          {formatCurrency(Math.abs(totals.net))}
+          {formatCurrencyShort(Math.abs(totals.net))}
         </Text>
       </View>
 
@@ -47,23 +47,23 @@ const TransactionTotalsCard = ({ totals }: TransactionTotalsCardProps) => {
             className="tx-total-value tx-total-value-income"
             numberOfLines={1}
             adjustsFontSizeToFit
-            minimumFontScale={0.7}
+            minimumFontScale={0.85}
           >
-            {formatCurrency(totals.income)}
+            {formatCurrencyShort(totals.income)}
           </Text>
         </View>
 
         <View className="tx-total-tile">
           <Text className="tx-total-label" numberOfLines={1}>
-            {t("transactions.totalOutcome", "Outcome")}
+            {t("transactions.totalOutcome", "Expenses")}
           </Text>
           <Text
             className="tx-total-value tx-total-value-outcome"
             numberOfLines={1}
             adjustsFontSizeToFit
-            minimumFontScale={0.7}
+            minimumFontScale={0.85}
           >
-            {formatCurrency(totals.outcome)}
+            {formatCurrencyShort(totals.outcome)}
           </Text>
         </View>
 
@@ -75,12 +75,12 @@ const TransactionTotalsCard = ({ totals }: TransactionTotalsCardProps) => {
             className="tx-total-value tx-total-value-neutral"
             numberOfLines={1}
             adjustsFontSizeToFit
-            minimumFontScale={0.7}
+            minimumFontScale={0.85}
           >
-            {formatCurrency(totals.subscriptions)}
+            {formatCurrencyShort(totals.subscriptions)}
           </Text>
           <Text className="tx-total-caption" numberOfLines={1}>
-            {t("transactions.ofOutcome", "of outcome")}
+            {t("transactions.ofOutcome", "of expenses")}
           </Text>
         </View>
       </View>

@@ -56,7 +56,7 @@ const TopSpendingList = ({ entries }: TopSpendingListProps) => {
             {t("dashboard.spendingCaption", {
               share: Math.round(entry.share * 100),
               count: entry.count,
-              defaultValue: "{{share}}% of outcome · {{count}} transactions",
+              defaultValue: "{{share}}% of expenses · {{count}} transactions",
             })}
           </Text>
         </View>

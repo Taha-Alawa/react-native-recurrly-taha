@@ -30,7 +30,7 @@ const SummaryTiles = ({ totals }: SummaryTilesProps) => {
             style={{ color: colors.chartIncome }}
             numberOfLines={1}
             adjustsFontSizeToFit
-            minimumFontScale={0.6}
+            minimumFontScale={0.85}
           >
             {formatCurrencyShort(totals.income)}
           </Text>
@@ -38,14 +38,14 @@ const SummaryTiles = ({ totals }: SummaryTilesProps) => {
 
         <View className="summary-tile">
           <Text className="summary-label" numberOfLines={1}>
-            {t("dashboard.outcome", "Outcome")}
+            {t("dashboard.outcome", "Expenses")}
           </Text>
           <Text
             className="summary-value"
             style={{ color: colors.chartOutcome }}
             numberOfLines={1}
             adjustsFontSizeToFit
-            minimumFontScale={0.6}
+            minimumFontScale={0.85}
           >
             {formatCurrencyShort(totals.outcome)}
           </Text>
@@ -61,12 +61,12 @@ const SummaryTiles = ({ totals }: SummaryTilesProps) => {
             className="summary-value summary-value-neutral"
             numberOfLines={1}
             adjustsFontSizeToFit
-            minimumFontScale={0.6}
+            minimumFontScale={0.85}
           >
             {formatCurrencyShort(totals.subscriptions)}
           </Text>
           <Text className="summary-caption" numberOfLines={1}>
-            {t("dashboard.ofOutcome", "of outcome")}
+            {t("dashboard.ofOutcome", "of expenses")}
           </Text>
         </View>
 
@@ -83,7 +83,7 @@ const SummaryTiles = ({ totals }: SummaryTilesProps) => {
             )}
             numberOfLines={1}
             adjustsFontSizeToFit
-            minimumFontScale={0.6}
+            minimumFontScale={0.85}
           >
             {formatCurrencyShort(Math.abs(saved))}
           </Text>

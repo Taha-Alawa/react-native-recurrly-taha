@@ -149,7 +149,7 @@ const CashflowChart = ({
             style={{ backgroundColor: colors.chartOutcome }}
           />
           <Text className="chart-legend-text">
-            {t("dashboard.outcome", "Outcome")}
+            {t("dashboard.outcome", "Expenses")}
           </Text>
         </View>
       </View>

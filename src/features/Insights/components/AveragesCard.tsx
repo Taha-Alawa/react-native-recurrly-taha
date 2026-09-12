@@ -69,7 +69,7 @@ const AveragesCard = ({ averages, period }: AveragesCardProps) => {
 
         <View className="stat-row">
           <Text className="stat-row-label" numberOfLines={1}>
-            {t("dashboard.avgOutcome", "Average outcome")}
+            {t("dashboard.avgOutcome", "Average expenses")}
           </Text>
           <Text className="stat-row-value" numberOfLines={1}>
             {formatCurrencyShort(averages.averageOutcome)} {perLabel}
